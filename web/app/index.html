@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <title>Dorm Management Tool</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1" />
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="../node_modules/angular-material/angular-material.css"/>
+    <!--<link rel="stylesheet" href="assets/app.css"/>-->
+    <link href="assets/app.css" rel="stylesheet" />
+</head>
+
+<body ng-app="starterApp" layout="column" ng-cloak>
+
+<md-toolbar layout-align="center" layout="row">
+    <h1>Dorm Management Tool</h1>
+</md-toolbar>
+
+<md-subheader align="right" style="padding-right: 5px">Logged In As John Doe</md-subheader>
+
+<div >
+    <md-content layout="column" layout-gt-sm="row" layout-padding="5px">
+        <div flex-md="50" flex-lg="30" layout="column" layout-padding="10px">
+                <md-card>
+                    <md-card-header>
+                        <md-card-header-text>
+                        <span class="md-title">Garbage Monitor</span>
+                    </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <md-list>
+                            <md-divider></md-divider>
+                            <md-list-item class="noright" layout="row" layout-xs="column" layout-padding="5">
+                                <p flex-gt-xs="30">
+                                    <md-radio-group layout="row">
+                                        <md-radio-button>ok</md-radio-button>
+                                        <md-radio-button>full</md-radio-button>
+                                    </md-radio-group>
+                                </p>
+                                <p flex-gt-xs="50" layout-align="center">Green Waste Bag<br />(<i>Assigned to <b>John Doe</b></i>)</p>
+                                <md-button flex-gt-xs="20" class="md-raised">Empty Trash</md-button>
+                            </md-list-item>
+                            <md-divider></md-divider>
+                            <md-list-item class="noright" layout="row" layout-xs="column" layout-padding="5">
+                                <p flex-gt-xs="30">
+                                    <md-radio-group layout="row">
+                                        <md-radio-button>ok</md-radio-button>
+                                        <md-radio-button>full</md-radio-button>
+                                    </md-radio-group>
+                                </p>
+                                <p flex-gt-xs="50">Brown Waste Bag<br />(<i>Assigned to <b>Johny Appleseed</b></i>)</p>
+                                <md-button flex-gt-xs="20" class="md-raised">Empty Trash</md-button>
+                            </md-list-item>
+                            <md-divider></md-divider>
+                            <md-list-item class="noright" layout="row" layout-xs="column" layout-padding="5">
+                                <p flex-gt-xs="30">
+                                    <md-radio-group layout="row">
+                                        <md-radio-button>ok</md-radio-button>
+                                        <md-radio-button>full</md-radio-button>
+                                    </md-radio-group>
+                                </p>
+                                <p flex-gt-xs="50">Blue Waste Bag<br />(<i>Assigned to <b>John Doe</b></i>)</p>
+                                <md-button flex-gt-xs="20" class="md-raised">Empty Trash</md-button>
+                            </md-list-item>
+                            <md-divider></md-divider>
+                        </md-list>
+                    </md-card-content>
+                </md-card>
+                <md-card>
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Stock Monitor</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <md-list>
+                            <md-divider></md-divider>
+                            <md-list-item class="noright" layout="row" layout-xs="column" layout-padding="5">
+                                <p flex-gt-xs="30">
+                                    <md-slider md-discrete md-invert step="50" min="0" max="100">
+                                    </md-slider>
+                                </p>
+                                <p flex-gt-xs="50">Green Waste Bags (50% left)<br />(<i>Last Replenishment: 16/05/2016</i>)</p>
+                                <md-button flex-gt-xs="20" class="md-raised">Replenish</md-button>
+                            </md-list-item>
+                            <md-divider></md-divider>
+                            <md-list-item class="noright" layout="row" layout-xs="column" layout-padding="5">
+                                <p flex-gt-xs="30">
+                                    <md-slider md-discrete md-invert step="50" min="0" max="100">
+                                    </md-slider>
+                                </p>
+                                <p flex-gt-xs="50">Brown Waste Bags (100% left)<br />(<i>Last Replenishment: 16/05/2016</b></i>)</p>
+                                <md-button flex-gt-xs="20" class="md-raised">Replenish</md-button>
+                            </md-list-item>
+                            <md-divider></md-divider>
+                            <md-list-item class="noright" layout="row" layout-xs="column" layout-padding="5">
+                                <p flex-gt-xs="30">
+                                    <md-slider md-discrete md-invert step="50" min="0" max="100">
+                                    </md-slider>
+                                </p>
+                                <p flex-gt-xs="50">Blue Waste Bags (depleted!)<br />(<i>Last Replenishment: 16/05/2016</i>)</p>
+                                <md-button flex-gt-xs="20" class="md-raised">Replenish</md-button>
+                            </md-list-item>
+                            <md-divider></md-divider>
+                        </md-list>
+                    </md-card-content>
+                </md-card>
+        </div>
+
+        <div flex layout="column" layout-padding="10px">
+                <md-card>
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Finance</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                </md-card>
+                <md-card>
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Log</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                </md-card>
+                <md-card>
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Information</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                </md-card>
+        </div>
+
+    </md-content>
+</div>
+
+<script src="../node_modules/angular/angular.js"></script>
+<script src="../node_modules/angular-animate/angular-animate.js"></script>
+<script src="../node_modules/angular-aria/angular-aria.js"></script>
+<script type="text/javascript" src="../node_modules/angular-material/angular-material.js"></script>
+
+<script type="text/javascript">
+    angular
+            .module('starterApp', ['ngMaterial']);
+</script>
+
+</body>
+</html>
