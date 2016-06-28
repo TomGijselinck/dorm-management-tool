@@ -56,4 +56,19 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     assert_not duplicate_user.valid?
   end
+
+  test 'password should be present' do
+    @user.password = ' '
+    assert_not @user.valid?
+  end
+
+  test 'password should have a minimum length of 8 characters' do
+    @user.password = @user.password_confirmation = 'x' * 7
+    assert_not @user.valid?
+  end
+
+  test 'password confirmation should equal the given password' do
+    @user.password_confirmation = 'wordpass'
+    assert_not @user.valid?
+  end
 end
