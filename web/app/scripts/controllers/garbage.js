@@ -12,15 +12,15 @@ angular.module('dormManagementToolApp')
     this.bags = {
       "green": {
         "status": "full",
-        "responsible": "John Doe"
+        "responsible": "John"
       },
       "brown": {
         "status": "ok",
-        "responsible": "Johny Appleseed"
+        "responsible": "Tom"
       },
       "blue": {
         "status": "almost full",
-        "responsible": "John Doe"
+        "responsible": "John"
       }
     };
   });
