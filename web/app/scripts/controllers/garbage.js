@@ -31,7 +31,6 @@ angular.module('dormManagementToolApp')
       $http({method: 'GET', url: 'http://localhost:3000/garbage_bags.json'})
         .then(function (response) {
           mv.bags = response.data;
-          console.log(response.data);
         });
     };
     this.getGarbageBags();
