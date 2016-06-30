@@ -1,10 +1,10 @@
 # Logs
 logs
-*.log
+../../backend/dorm-management/log/test.log
 npm-debug.log*
 
 # Runtime data
-pids
+backend/dorm-management/tmp/pids
 *.pid
 *.seed
 
