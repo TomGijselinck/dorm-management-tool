@@ -7,6 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Status</th>
+      <th>User</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= garbage_bag.name %></td>
         <td><%= garbage_bag.status %></td>
+        <td><%= garbage_bag.user %></td>
         <td><%= link_to 'Show', garbage_bag %></td>
         <td><%= link_to 'Edit', edit_garbage_bag_path(garbage_bag) %></td>
         <td><%= link_to 'Destroy', garbage_bag, method: :delete, data: { confirm: 'Are you sure?' } %></td>

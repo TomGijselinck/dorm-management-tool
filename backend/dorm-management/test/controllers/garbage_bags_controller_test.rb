@@ -18,7 +18,7 @@ class GarbageBagsControllerTest < ActionController::TestCase
 
   test "should create garbage_bag" do
     assert_difference('GarbageBag.count') do
-      post :create, garbage_bag: { name: @garbage_bag.name, status: @garbage_bag.status }
+      post :create, garbage_bag: { name: @garbage_bag.name, status: @garbage_bag.status, user_id: @garbage_bag.user_id }
     end
 
     assert_redirected_to garbage_bag_path(assigns(:garbage_bag))
@@ -35,7 +35,7 @@ class GarbageBagsControllerTest < ActionController::TestCase
   end
 
   test "should update garbage_bag" do
-    patch :update, id: @garbage_bag, garbage_bag: { name: @garbage_bag.name, status: @garbage_bag.status }
+    patch :update, id: @garbage_bag, garbage_bag: { name: @garbage_bag.name, status: @garbage_bag.status, user_id: @garbage_bag.user_id }
     assert_redirected_to garbage_bag_path(assigns(:garbage_bag))
   end
 

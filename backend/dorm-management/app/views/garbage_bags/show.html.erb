@@ -10,5 +10,10 @@
   <%= @garbage_bag.status %>
 </p>
 
+<p>
+  <strong>User:</strong>
+  <%= @garbage_bag.user %>
+</p>
+
 <%= link_to 'Edit', edit_garbage_bag_path(@garbage_bag) %> |
 <%= link_to 'Back', garbage_bags_path %>
