@@ -41,10 +41,31 @@
               </ul>
             </md-card-content>
           </md-card>
+          <md-card id="garbageCard" ng-controller="GarbageCtrl as garbage">
+            <md-card-header>
+              <md-card-header-text>
+                <span class="md-title">Garbage Monitor</span>
+              </md-card-header-text>
+            </md-card-header>
+            <md-card-content>
+              <md-divider></md-divider>
+              <md-list ng-repeat="(garbageBag, info) in garbage.bags">
+                <md-list-item class="noright" layout="row" layout-xs="column" layout-padding="5">
+                  <p flex-gt-xs="45">
+                    <md-radio-group layout="row" ng-model="info.status">
+                      <md-radio-button value="ok">ok</md-radio-button>
+                      <md-radio-button value="almost full">almost full</md-radio-button>
+                      <md-radio-button value="full">full</md-radio-button>
+                    </md-radio-group>
+                  </p>
+                  <p flex-gt-xs="35" layout-align="center">{{garbageBag}} waste bags<br />(<i>Assigned to <b>{{info.responsible}}</b></i>)</p>
+                  <md-button flex-gt-xs="20" class="md-raised">Empty Trash</md-button>
+                </md-list-item>
+                <md-divider></md-divider>
+              </md-list>
+            </md-card-content>
+          </md-card>
         </div>
-
-
-      </md-content>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -72,6 +93,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/user.js"></script>
+    <script src="scripts/controllers/garbage.js"></script>
     <!-- endbuild -->
 </body>
 </html>
