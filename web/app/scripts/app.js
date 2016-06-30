@@ -12,5 +12,6 @@ angular
   .module('dormManagementToolApp', [
     'ngAnimate',
     'ngAria',
-    'ngMessages'
+    'ngMessages',
+    'ngMaterial'
   ]);
