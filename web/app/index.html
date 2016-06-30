@@ -52,11 +52,12 @@
               <md-list ng-repeat="garbageBag in garbage.bags">
                 <md-list-item class="noright" layout="row" layout-xs="column" layout-padding="5">
                   <p flex-gt-xs="45">
-                    <md-radio-group layout="row" ng-model="garbageBag.status">
-                      <md-radio-button value="ok">ok</md-radio-button>
-                      <md-radio-button value="almost full">almost full</md-radio-button>
-                      <md-radio-button value="full">full</md-radio-button>
-                    </md-radio-group>
+                    <md-button class="md-raised"
+                               ng-class="{'md-primary': garbageBag.status == 'ok'}"
+                               ng-click="garbageBag.status='ok'; garbage.setStatus(garbageBag.id, 'ok')">ok</md-button>
+                    <md-button class="md-raised"
+                               ng-class="{'md-warn': garbageBag.status == 'full'}"
+                               ng-click="garbageBag.status='full'; garbage.setStatus(garbageBag.id, 'full')">full</md-button>
                   </p>
                   <div flex-gt-xs="35" layout-align="left">
                     <h3>{{garbageBag.name}} waste bags</h3>

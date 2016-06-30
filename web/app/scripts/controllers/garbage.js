@@ -22,13 +22,27 @@ angular.module('dormManagementToolApp')
       },
       {
         "name": "indigo",
-        "status": "almost full",
+        "status": "full",
         "responsible": "Merry"
       }
     ];
     var mv = this;
-    $http({method: 'GET', url: 'http://localhost:3000/garbage_bags.json'})
-      .then(function (response) {
-        mv.bags = response.data;
-    });
+    this.getGarbageBags = function () {
+      $http({method: 'GET', url: 'http://localhost:3000/garbage_bags.json'})
+        .then(function (response) {
+          mv.bags = response.data;
+          console.log(response.data);
+        });
+    };
+    this.getGarbageBags();
+    this.setStatus = function (id, status) {
+      var body = JSON.stringify({"garbage_bag": {"status": status}});
+      var url = 'http://localhost:3000/garbage_bags/' + id + '.json';
+      $http({method: 'PATCH', url: url, data: body}).then(function (response) {
+        //ok!
+      },
+      function () {
+        console.log('failed to set garbage status');
+      });
+    };
   }]);
