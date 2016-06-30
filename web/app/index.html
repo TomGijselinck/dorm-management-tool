@@ -58,7 +58,10 @@
                       <md-radio-button value="full">full</md-radio-button>
                     </md-radio-group>
                   </p>
-                  <p flex-gt-xs="35" layout-align="center">{{garbageBag}} waste bags<br />(<i>Assigned to <b>{{info.responsible}}</b></i>)</p>
+                  <div flex-gt-xs="35" layout-align="left">
+                    <h3>{{garbageBag}} waste bags</h3>
+                    <p>(<i>Assigned to <b>{{info.responsible}}</b></i>)</p>
+                  </div>
                   <md-button flex-gt-xs="20" class="md-raised">Empty Trash</md-button>
                 </md-list-item>
                 <md-divider></md-divider>
