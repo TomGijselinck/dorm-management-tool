@@ -49,18 +49,18 @@
             </md-card-header>
             <md-card-content>
               <md-divider></md-divider>
-              <md-list ng-repeat="(garbageBag, info) in garbage.bags">
+              <md-list ng-repeat="garbageBag in garbage.bags">
                 <md-list-item class="noright" layout="row" layout-xs="column" layout-padding="5">
                   <p flex-gt-xs="45">
-                    <md-radio-group layout="row" ng-model="info.status">
+                    <md-radio-group layout="row" ng-model="garbageBag.status">
                       <md-radio-button value="ok">ok</md-radio-button>
                       <md-radio-button value="almost full">almost full</md-radio-button>
                       <md-radio-button value="full">full</md-radio-button>
                     </md-radio-group>
                   </p>
                   <div flex-gt-xs="35" layout-align="left">
-                    <h3>{{garbageBag}} waste bags</h3>
-                    <p>(<i>Assigned to <b>{{info.responsible}}</b></i>)</p>
+                    <h3>{{garbageBag.name}} waste bags</h3>
+                    <p>(<i>Assigned to <b>{{garbageBag.responsible}}</b></i>)</p>
                   </div>
                   <md-button flex-gt-xs="20" class="md-raised">Empty Trash</md-button>
                 </md-list-item>

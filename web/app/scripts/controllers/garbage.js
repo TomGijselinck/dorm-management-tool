@@ -8,19 +8,27 @@
  * Controller of the dormManagementToolApp
  */
 angular.module('dormManagementToolApp')
-  .controller('GarbageCtrl', function () {
-    this.bags = {
-      "green": {
+  .controller('GarbageCtrl', ['$http', function ($http) {
+    this.bags = [
+      {
+        "name": "purple",
         "status": "full",
-        "responsible": "John"
+        "responsible": "Bilbo"
       },
-      "brown": {
+      {
+        "name": "yellow",
         "status": "ok",
-        "responsible": "Tom"
+        "responsible": "Pippin"
       },
-      "blue": {
+      {
+        "name": "indigo",
         "status": "almost full",
-        "responsible": "John"
+        "responsible": "Merry"
       }
-    };
-  });
+    ];
+    var mv = this;
+    $http({method: 'GET', url: 'http://localhost:3000/garbage_bags.json'})
+      .then(function (response) {
+        mv.bags = response.data;
+    });
+  }]);
