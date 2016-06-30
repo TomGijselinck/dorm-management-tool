@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @garbage_bag.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @garbage_bag.status %>
+</p>
+
+<%= link_to 'Edit', edit_garbage_bag_path(@garbage_bag) %> |
+<%= link_to 'Back', garbage_bags_path %>
