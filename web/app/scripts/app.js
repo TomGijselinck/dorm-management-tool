@@ -13,5 +13,16 @@ angular
     'ngAnimate',
     'ngAria',
     'ngMessages',
-    'ngMaterial'
-  ]);
+    'ngMaterial',
+    'ui.router'
+  ])
+  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+      .state('dashboard', {
+        url: '/',
+        templateUrl: 'views/dashboard.html',
+        authenticate: true
+      })
+  }]);
