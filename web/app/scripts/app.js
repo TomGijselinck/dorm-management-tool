@@ -25,4 +25,18 @@ angular
         templateUrl: 'views/dashboard.html',
         authenticate: true
       })
-  }]);
+      .state('login', {
+        url: '/login',
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl as login',
+        authenticate: false
+      })
+  }])
+  .run(function ($rootScope, $state) {
+    $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+      if (toState.authenticate) {
+        $state.transitionTo("login");
+        event.preventDefault();
+      }
+    })
+  });
