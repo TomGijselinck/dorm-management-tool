@@ -78,4 +78,8 @@ class UserTest < ActiveSupport::TestCase
     @user.password_confirmation = 'wordpass'
     assert_not @user.valid?
   end
+
+  test 'user should exist' do
+    assert false; # TODO: implement this
+  end
 end
