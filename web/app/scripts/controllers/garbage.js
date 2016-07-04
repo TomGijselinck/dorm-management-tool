@@ -8,6 +8,11 @@
  * Controller of the dormManagementToolApp
  */
 angular.module('dormManagementToolApp')
+  .run(function($http) {
+    if (localStorage.getItem('user')) {
+      $http.defaults.headers.common.Authorization = 'Bearer ' + JSON.parse(localStorage.getItem('user')).access_token;
+    }
+  })
   .controller('GarbageCtrl', ['$http', function ($http) {
     this.bags = [
       {
