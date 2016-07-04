@@ -1,4 +1,8 @@
 class GarbageBagsController < ApplicationController
+
+  include RailsApiAuth::Authentication
+
+  before_action :authenticate!
   before_action :set_garbage_bag, only: [:show, :edit, :update, :destroy]
 
   # GET /garbage_bags

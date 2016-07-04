@@ -1,4 +1,8 @@
 class InactiveWeeksController < ApplicationController
+
+  include RailsApiAuth::Authentication
+
+  before_action :authenticate!
   before_action :set_inactive_week, only: [:show, :edit, :update, :destroy]
 
   # GET /inactive_weeks
