@@ -32,9 +32,9 @@ angular
         authenticate: false
       })
   }])
-  .run(function ($rootScope, $state) {
+  .run(function ($rootScope, $state, AuthService) {
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-      if (toState.authenticate) {
+      if (toState.authenticate && !AuthService.isAuthenticated()) {
         $state.transitionTo("login");
         event.preventDefault();
       }
