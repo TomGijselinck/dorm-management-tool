@@ -1,20 +1,20 @@
-<div class="flexbox-parent">
-  <div layout="row" layout-align="center">
-    <h2>Login</h2>
-  </div>
+<div class="flexbox-parent" ng-controller="LoginCtrl as auth">
   <div layout="row" layout-align="center center">
     <md-content layout="column" layout-padding>
       <form name="login" layout="column">
         <md-input-container>
           <md-icon>account_circle</md-icon>
           <label>Name</label>
-          <input type="text" ng-model="name">
+          <input type="text" ng-model="auth.name">
         </md-input-container>
         <md-input-container>
           <md-icon>lock</md-icon>
           <label>Password</label>
-          <input type="password" ng-model="password">
+          <input type="password" ng-model="auth.password">
         </md-input-container>
+        <p ng-if="auth.message">{{auth.message}}</p>
+        <md-button class="md-primary md-raised"
+                   ng-click="auth.login(auth.name, auth.password)">Log In</md-button>
       </form>
     </md-content>
   </div>

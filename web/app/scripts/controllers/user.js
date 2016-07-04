@@ -11,4 +11,7 @@ angular.module('dormManagementToolApp')
   .controller('UserCtrl', function () {
     this.name = "John";
     this.duties = ['brown waste bags', 'blue waste bags'];
+    if (localStorage.getItem('user')) {
+      this.name = JSON.parse(localStorage.getItem('user')).name;
+    }
   });
