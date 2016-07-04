@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   include RailsApiAuth::Authentication
 
-  before_action :authenticate!
+  before_action :authenticate!, except: [:create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
