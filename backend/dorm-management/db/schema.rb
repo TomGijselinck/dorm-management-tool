@@ -31,6 +31,18 @@ ActiveRecord::Schema.define(version: 20160630124016) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "logins", force: :cascade do |t|
+    t.string   "identification",          null: false
+    t.string   "password_digest"
+    t.string   "oauth2_token",            null: false
+    t.string   "uid"
+    t.string   "single_use_oauth2_token"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "provider"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
