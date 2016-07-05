@@ -25,6 +25,13 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def me
+    @user = User.find_by_email(params[:email])
+    respond_to do |format|
+      format.json { render :show }
+    end
+  end
+
   # POST /users
   # POST /users.json
   def create
