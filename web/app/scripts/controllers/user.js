@@ -8,8 +8,8 @@
  * Controller of the dormManagementToolApp
  */
 angular.module('dormManagementToolApp')
-  .controller('UserCtrl', function () {
-    this.name = "John";
+  .controller('UserCtrl',  function (UserService) {
+    this.name = UserService.getName();
     this.duties = ['brown waste bags', 'blue waste bags'];
     if (localStorage.getItem('user')) {
       this.name = JSON.parse(localStorage.getItem('user')).name;
