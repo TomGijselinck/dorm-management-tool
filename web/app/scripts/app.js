@@ -31,6 +31,11 @@ angular
         controller: 'LoginCtrl as login',
         authenticate: false
       })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'views/register.html',
+        authenticate: true
+      })
   }])
   .run(function ($rootScope, $state, AuthService) {
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
