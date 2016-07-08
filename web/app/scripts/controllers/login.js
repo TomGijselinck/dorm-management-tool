@@ -17,13 +17,12 @@ angular.module('dormManagementToolApp')
       $http({method: 'POST', url: url, data: body})
         .then(
           function (response) {
-            var headers = { "Content-Type": "application/json",
-                             "Authorization": "Bearer " + response.data['access_token']};
-            $http({method: 'POST', url: 'http://localhost:3000/users/me.json',
-                   data: JSON.stringify({"email": email}),
-                   headers: headers})
             // localStorage.setItem('token', JSON.stringify(response.data));
             storeToken(JSON.stringify(response.data)).then(function () {
+              $http.defaults.headers.common.Authorization =
+                'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token;
+              $http({method: 'POST', url: 'http://localhost:3000/users/me.json',
+                data: JSON.stringify({"email": email})})
                 .then(
                   function (response) {
                     console.log('succeeded second request');
