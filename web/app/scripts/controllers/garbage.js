@@ -41,7 +41,6 @@ angular.module('dormManagementToolApp')
           ];
         });
     };
-    this.getGarbageBags();
     this.setStatus = function (id, status) {
       var body = JSON.stringify({"garbage_bag": {"status": status}});
       var url = 'http://localhost:3000/garbage_bags/' + id + '.json';
