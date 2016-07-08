@@ -44,5 +44,9 @@ angular
     this.toggleSidenav = function (menuId) {
       $mdSidenav(menuId).toggle();
     };
+    this.logout = function () {
+      localStorage.removeItem('token');
+      $state.go('login');
+    };
     this.userName = UserService.getName();
   }]);

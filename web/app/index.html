@@ -33,6 +33,18 @@
           <div>{{ app.userName }}</div>
         </div>
       </md-toolbar>
+      <md-list>
+        <md-list-item>
+          <a ng-click="app.logout()">
+            <md-item-content md-ink-ripple layout="row" layout-align="start center">
+              <div class="inset">
+                <md-icon>exit_to_app</md-icon>
+              </div>
+              <div class="inset">Log Out</div>
+            </md-item-content>
+          </a>
+        </md-list-item>
+      </md-list>
     </md-sidenav>
 
     <div layout="column" class="relative" layout-fill>
