@@ -14,28 +14,31 @@ angular.module('dormManagementToolApp')
     }
   })
   .controller('GarbageCtrl', ['$http', function ($http) {
-    this.bags = [
-      {
-        "name": "purple",
-        "status": "full",
-        "responsible": "Bilbo"
-      },
-      {
-        "name": "yellow",
-        "status": "ok",
-        "responsible": "Pippin"
-      },
-      {
-        "name": "indigo",
-        "status": "full",
-        "responsible": "Merry"
-      }
-    ];
     var mv = this;
-    this.getGarbageBags = function () {
+    this.getData = function () {
       $http({method: 'GET', url: 'http://localhost:3000/garbage_bags.json'})
         .then(function (response) {
           mv.bags = response.data;
+        },
+        function () {
+          console.log('GET garbage_bags.json failed!');
+          mv.bags = [
+            {
+              "name": "purple",
+              "status": "full",
+              "responsible": "Bilbo"
+            },
+            {
+              "name": "yellow",
+              "status": "ok",
+              "responsible": "Pippin"
+            },
+            {
+              "name": "indigo",
+              "status": "full",
+              "responsible": "Merry"
+            }
+          ];
         });
     };
     this.getGarbageBags();
