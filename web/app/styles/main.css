@@ -123,3 +123,7 @@ md-bottom-sheet  md-icon {
 md-content.md-default-theme, md-content {
   background-color: #eee;
 }
+
+md-sidenav {
+  fill: #737373;
+}

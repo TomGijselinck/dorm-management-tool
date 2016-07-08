@@ -39,4 +39,10 @@ angular
         event.preventDefault();
       }
     })
-  });
+  })
+  .controller('AppCtrl', ['$mdSidenav', '$state', 'UserService', function ($mdSidenav, $state, UserService) {
+    this.toggleSidenav = function (menuId) {
+      $mdSidenav(menuId).toggle();
+    };
+    this.userName = UserService.getName();
+  }]);
