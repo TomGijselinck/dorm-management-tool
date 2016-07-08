@@ -120,7 +120,7 @@ md-bottom-sheet  md-icon {
   margin-right:20px;
 }
 
-md-content.md-default-theme, md-content {
+md-content.md-default-theme, md-content, body {
   background-color: #eee;
 }
 
