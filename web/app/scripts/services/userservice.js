@@ -10,6 +10,6 @@
 angular.module('dormManagementToolApp')
   .service('UserService', function () {
     this.getName = function () {
-      return localStorage.getItem('user').name;
+      return JSON.parse(localStorage.getItem('user')).name;
     }
   });
