@@ -8,7 +8,7 @@
  * Controller of the dormManagementToolApp
  */
 angular.module('dormManagementToolApp')
-  .controller('LoginCtrl', ['$http', '$mdToast', function ($http, $mdToast) {
+  .controller('LoginCtrl', ['$http', '$mdToast', '$state', '$q', function ($http, $mdToast, $state, $q) {
     this.error = false;
     var mv = this;
     this.login = function (email, password) {
@@ -17,22 +17,24 @@ angular.module('dormManagementToolApp')
       $http({method: 'POST', url: url, data: body})
         .then(
           function (response) {
-            localStorage.setItem('token', JSON.stringify(response.data));
             var headers = { "Content-Type": "application/json",
                              "Authorization": "Bearer " + response.data['access_token']};
             $http({method: 'POST', url: 'http://localhost:3000/users/me.json',
                    data: JSON.stringify({"email": email}),
                    headers: headers})
-              .then(
-                function (response) {
-                  console.log('succeeded second request');
-                  localStorage.setItem('user', JSON.stringify(response.data));
-                  window.location.href = '/';
-                },
-                function () {
-                  console.log('failed second request')
-                }
-              );
+            // localStorage.setItem('token', JSON.stringify(response.data));
+            storeToken(JSON.stringify(response.data)).then(function () {
+                .then(
+                  function (response) {
+                    console.log('succeeded second request');
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                    $state.go('dashboard');
+                  },
+                  function () {
+                    console.log('failed second request')
+                  }
+                );
+            });
           },
           function () {
             mv.showMessage('Wrong credentials!');
@@ -48,5 +50,12 @@ angular.module('dormManagementToolApp')
           .hideDelay(3000)
       );
     };
+
+    function storeToken(token) {
+      var q = $q.defer();
+      localStorage.setItem('token', token);
+      q.resolve();
+      return q.promise;
+    }
 
   }]);
