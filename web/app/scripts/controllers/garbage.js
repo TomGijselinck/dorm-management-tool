@@ -26,17 +26,26 @@ angular.module('dormManagementToolApp')
             {
               "name": "purple",
               "status": "full",
-              "responsible": "Bilbo"
+              "responsible": {
+                "id": 1,
+                "name": "Bilbo"
+              }
             },
             {
               "name": "yellow",
               "status": "ok",
-              "responsible": "Pippin"
+              "responsible": {
+                "id": 2,
+                "name": "Pippin"
+              }
             },
             {
               "name": "indigo",
               "status": "full",
-              "responsible": "Merry"
+              "responsible": {
+                "id": 3,
+                "name": "Merry"
+              }
             }
           ];
         });
