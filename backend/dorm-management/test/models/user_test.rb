@@ -64,6 +64,7 @@ class UserTest < ActiveSupport::TestCase
     assert_equal mixed_case_email.downcase, @user.reload.email
   end
 
+  #TODO: fix failing test
   test 'password should be present' do
     @user.password = ' '
     assert_not @user.valid?
