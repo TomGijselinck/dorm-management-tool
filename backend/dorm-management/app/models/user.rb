@@ -10,5 +10,6 @@ class User < ActiveRecord::Base
   has_many :garbage_bags
   has_many :garbage_bag_duties
   has_one :login
+  belongs_to :dorm
 
 end
