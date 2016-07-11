@@ -11,5 +11,8 @@ angular.module('dormManagementToolApp')
   .service('UserService', function () {
     this.getName = function () {
       return JSON.parse(localStorage.getItem('user')).name;
+    };
+    this.getId = function() {
+      return JSON.parse(localStorage.getItem(('user')).id);
     }
   });
