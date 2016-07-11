@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :inactive_weeks
   resources :users
   resources :garbage_bag_duties
+  resources :dorms
 
   post '/users/me', to: 'users#me'
   # The priority is based upon order of creation: first created -> highest priority.
