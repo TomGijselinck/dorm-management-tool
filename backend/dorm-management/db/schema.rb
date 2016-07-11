@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630124016) do
+ActiveRecord::Schema.define(version: 20160711094226) do
+
+  create_table "garbage_bag_duties", force: :cascade do |t|
+    t.datetime "datetime"
+    t.integer  "user_id"
+    t.integer  "garbage_bag_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "garbage_bag_duties", ["garbage_bag_id"], name: "index_garbage_bag_duties_on_garbage_bag_id"
+  add_index "garbage_bag_duties", ["user_id"], name: "index_garbage_bag_duties_on_user_id"
 
   create_table "garbage_bags", force: :cascade do |t|
     t.string   "name"
