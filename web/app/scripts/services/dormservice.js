@@ -14,7 +14,7 @@ angular.module('dormManagementToolApp')
       {
         "name": "Tom",
         "user_id": 1,
-        "waste_bag_duties": [
+        "garbage_bag_duties": [
           {
             "name": "brown",
             "completed": 5
@@ -32,7 +32,7 @@ angular.module('dormManagementToolApp')
       {
         "name": "Jim",
         "user_id": 10,
-        "waste_bag_duties": [
+        "garbage_bag_duties": [
           {
             "name": "brown",
             "completed": 3
@@ -53,15 +53,15 @@ angular.module('dormManagementToolApp')
       var min = Infinity;
       var duty = 0;
       for (var i = 0; i < mv.residents.length; i++) {
-        for (var j = 0; j < mv.residents[i].waste_bag_duties.length; j++) {
-          if (mv.residents[i].waste_bag_duties[j].name == bag && mv.residents[i].waste_bag_duties[j].completed < min) {
+        for (var j = 0; j < mv.residents[i].garbage_bag_duties.length; j++) {
+          if (mv.residents[i].garbage_bag_duties[j].name == bag && mv.residents[i].garbage_bag_duties[j].completed < min) {
             responsible = i;
             duty = j;
-            min = mv.residents[i].waste_bag_duties[j].completed;
+            min = mv.residents[i].garbage_bag_duties[j].completed;
           }
         }
       }
-      mv.residents[responsible].waste_bag_duties[duty].completed++;
+      mv.residents[responsible].garbage_bag_duties[duty].completed++;
       return mv.residents[responsible];
     };
   });
