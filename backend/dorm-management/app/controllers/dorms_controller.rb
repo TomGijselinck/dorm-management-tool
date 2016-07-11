@@ -2,7 +2,7 @@ class DormsController < ApplicationController
   include RailsApiAuth::Authentication
 
   before_action :authenticate!
-  before_action :set_dorm, only: [:show, :edit, :update,:destroy]
+  before_action :set_dorm, only: [:show, :edit, :update, :destroy, :residents]
 
   def index
     render :json => Dorm.all
@@ -34,6 +34,10 @@ class DormsController < ApplicationController
   def destroy
     @dorm.destroy
     head :no_content
+  end
+
+  def residents
+    render json: @dorm.users.as_json(only: [:id, :name, :email, :dorm_id])
   end
 
   private
