@@ -24,7 +24,7 @@ class GarbageBagDutiesController < ApplicationController
   end
 
   def update
-    if @garbage_bag_duty.update(@garbage_bag_duty_params)
+    if @garbage_bag_duty.update(garbage_bag_duty_params)
       render :show, status: :ok, location: @garbage_bag_duty
     else
       render json: @garbage_bag_duty.errors, status: :unprocessable_entity
