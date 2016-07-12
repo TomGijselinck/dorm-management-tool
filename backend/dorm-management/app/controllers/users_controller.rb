@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include RailsApiAuth::Authentication
 
   before_action :authenticate!, except: [:create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :duties]
 
   # GET /users
   # GET /users.json
@@ -70,6 +70,10 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def duties
+    render json: @user.garbage_bag_duties
   end
 
   private
