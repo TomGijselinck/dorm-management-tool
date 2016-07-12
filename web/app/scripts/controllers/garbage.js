@@ -64,10 +64,14 @@ angular.module('dormManagementToolApp')
           console.log('failed to set garbage status');
         });
       };
-      this.tryToEmptyTrash = function (garbage_id, garbage_name, assigned_user_id, event) {
+      this.tryToEmptyTrash = function (garbage_id, garbage_name, assigned_user_id, status, event) {
         var user_id = UserService.getId();
         if (assigned_user_id != user_id) {
           mv.showConfirmNotAssigned(garbage_id, garbage_name, event);
+        } else if (status =='ok') {
+        //  this check is not done when not signed in, as it is assumed that if a user
+        //  tries to empty a waste bag not assigned to him, he knows if it is not empty
+          mv.showConfirmNotFull(garbage_id, garbage_name, event)
         } else {
           this.emptyTrash(garbage_id, garbage_name)
         }
@@ -99,6 +103,21 @@ angular.module('dormManagementToolApp')
         var confirm = $mdDialog.confirm()
           .title('Empty waste bag not assigned to you?')
           .textContent('This will be added to your completed garbage duties.')
+          .targetEvent(event)
+          .ok('Empty trash')
+          .cancel('Cancel');
+        $mdDialog.show(confirm).then(function() {
+          mv.emptyTrash(garbage_id, garbage_name);
+        }, function() {
+          console.log('You decided not to empty the trash.');
+        });
+      };
+      this.showConfirmNotFull = function(garbage_id, garbage_name, event) {
+        var confirm = $mdDialog.confirm()
+          .title('Empty waste bag which is not full?')
+          .textContent('Looks like this garbage bag is not full yet (or his status it not up to date). ' +
+            'Are you sure you want to empty it while not being stated as full? ' +
+            'This will be added to your completed garbage duties.')
           .targetEvent(event)
           .ok('Empty trash')
           .cancel('Cancel');
