@@ -21,8 +21,9 @@
           <p>(<i>Assigned to <b>{{garbageBag.responsible.name}}</b></i>)</p>
         </div>
         <!--TODO: warning if not full-->
+        <!--TODO: and add warning if other id than assigned-->
         <md-button flex-gt-xs="20" class="md-raised"
-                   ng-click="garbage.emptyTrash(garbageBag.id, garbageBag.name, garbageBag.responsible.id)">
+                   ng-click="garbage.tryToEmptyTrash(garbageBag.id, garbageBag.name, garbageBag.responsible.id, $event)">
           Empty Trash
         </md-button>
       </md-list-item>

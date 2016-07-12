@@ -13,8 +13,8 @@ angular.module('dormManagementToolApp')
       $http.defaults.headers.common.Authorization = 'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token;
     }
   })
-  .controller('GarbageCtrl', ['$http', '$filter', 'DormService', 'GarbageDutyService', 'UserService',
-    function ($http, $filter, DormService, GarbageDutyService, UserService) {
+  .controller('GarbageCtrl', ['$http', '$filter', '$mdDialog', 'DormService', 'GarbageDutyService', 'UserService',
+    function ($http, $filter, $mdDialog, DormService, GarbageDutyService, UserService) {
       var mv = this;
       this.getData = function () {
         $http({method: 'GET', url: 'http://localhost:3000/garbage_bags.json'})
@@ -64,6 +64,14 @@ angular.module('dormManagementToolApp')
           console.log('failed to set garbage status');
         });
       };
+      this.tryToEmptyTrash = function (garbage_id, garbage_name, assigned_user_id, event) {
+        var user_id = UserService.getId();
+        if (assigned_user_id != user_id) {
+          mv.showConfirmNotAssigned(garbage_id, garbage_name, event);
+        } else {
+          this.emptyTrash(garbage_id, garbage_name)
+        }
+      };
       this.emptyTrash = function (garbage_id, garbage_name) {
         var user_id = UserService.getId();
         var newResponsible = DormService.getNextResponsible(garbage_name, user_id);
@@ -72,9 +80,10 @@ angular.module('dormManagementToolApp')
         bag.responsible.name = newResponsible.name;
         bag.responsible.id = newResponsible.id;
         var body = JSON.stringify(
-          {"garbage_bag": {
-            "status": "ok",
-            "user_id": newResponsible.id
+          {
+            "garbage_bag": {
+              "status": "ok",
+              "user_id": newResponsible.id
             }
           });
         var url = 'http://localhost:3000/garbage_bags/' + garbage_id + '.json';
@@ -85,5 +94,18 @@ angular.module('dormManagementToolApp')
             console.log('failed to empty trash');
           });
         GarbageDutyService.addCompletedDuty(user_id, garbage_id, new Date());
+      };
+      this.showConfirmNotAssigned = function(garbage_id, garbage_name, event) {
+        var confirm = $mdDialog.confirm()
+          .title('Empty waste bag not assigned to you?')
+          .textContent('This will be added to your completed garbage duties.')
+          .targetEvent(event)
+          .ok('Empty trash')
+          .cancel('Cancel');
+        $mdDialog.show(confirm).then(function() {
+          mv.emptyTrash(garbage_id, garbage_name);
+        }, function() {
+          console.log('You decided not to empty the trash.');
+        });
       };
   }]);
