@@ -22,7 +22,9 @@
         </div>
         <!--TODO: warning if not full-->
         <md-button flex-gt-xs="20" class="md-raised"
-                   ng-click="garbage.emptyTrash(garbageBag.id, garbageBag.name)">Empty Trash</md-button>
+                   ng-click="garbage.emptyTrash(garbageBag.id, garbageBag.name, garbageBag.responsible.id)">
+          Empty Trash
+        </md-button>
       </md-list-item>
       <md-divider></md-divider>
     </md-list>
