@@ -13,7 +13,7 @@ angular.module('dormManagementToolApp')
     this.residents = [
       {
         "name": "Tom",
-        "user_id": 1,
+        "id": 1,
         "garbage_bag_duties": [
           {
             "name": "brown",
@@ -31,7 +31,7 @@ angular.module('dormManagementToolApp')
       },
       {
         "name": "Jim",
-        "user_id": 10,
+        "id": 10,
         "garbage_bag_duties": [
           {
             "name": "brown",
