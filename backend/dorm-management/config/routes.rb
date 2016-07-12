@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post '/users/me', to: 'users#me'
   get 'users/:id/duties.json', to: 'users#duties'
   get 'dorms/:id/residents.json', to: 'dorms#residents'
+  get 'dorms/:id/residents_summary.json', to: 'dorms#residents_summary'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
