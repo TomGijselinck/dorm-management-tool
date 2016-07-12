@@ -13,7 +13,8 @@ angular.module('dormManagementToolApp')
       $http.defaults.headers.common.Authorization = 'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token;
     }
   })
-  .controller('GarbageCtrl', ['$http', '$filter', 'DormService', function ($http, $filter, DormService) {
+  .controller('GarbageCtrl', ['$http', '$filter', 'DormService', 'GarbageDutyService',
+    function ($http, $filter, DormService, GarbageDutyService) {
     var mv = this;
     this.getData = function () {
       $http({method: 'GET', url: 'http://localhost:3000/garbage_bags.json'})
