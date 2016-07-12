@@ -48,20 +48,20 @@ angular.module('dormManagementToolApp')
         ]
       }
     ];
-    this.getNextResponsible = function (bag) {
+    this.getNextResponsible = function (bag_name, current_responsible_name) {
+      var current_resident = $filter('filter')(mv.residents, {name: current_responsible_name})[0];
+      var current_duty = $filter('filter')(current_resident, {name: bag_name})[0];
+      current_duty.completed++;
       var responsible = null;
       var min = Infinity;
-      var duty = 0;
       for (var i = 0; i < mv.residents.length; i++) {
         for (var j = 0; j < mv.residents[i].garbage_bag_duties.length; j++) {
-          if (mv.residents[i].garbage_bag_duties[j].name == bag && mv.residents[i].garbage_bag_duties[j].completed < min) {
+          if (mv.residents[i].garbage_bag_duties[j].name == bag_name && mv.residents[i].garbage_bag_duties[j].completed < min) {
             responsible = i;
-            duty = j;
             min = mv.residents[i].garbage_bag_duties[j].completed;
           }
         }
       }
-      mv.residents[responsible].garbage_bag_duties[duty].completed++;
       return mv.residents[responsible];
     };
   });
