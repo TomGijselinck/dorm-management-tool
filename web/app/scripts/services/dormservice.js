@@ -48,8 +48,8 @@ angular.module('dormManagementToolApp')
         ]
       }
     ];
-    this.getNextResponsible = function (bag_name, current_responsible_name) {
-      var current_resident = $filter('filter')(mv.residents, {name: current_responsible_name})[0];
+    this.getNextResponsible = function (bag_name, current_responsible_id) {
+      var current_resident = $filter('filter')(mv.residents, {name: current_responsible_id})[0];
       var current_duty = $filter('filter')(current_resident, {name: bag_name})[0];
       current_duty.completed++;
       var responsible = null;
