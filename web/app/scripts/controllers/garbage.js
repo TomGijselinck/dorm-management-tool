@@ -13,8 +13,8 @@ angular.module('dormManagementToolApp')
       $http.defaults.headers.common.Authorization = 'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token;
     }
   })
-  .controller('GarbageCtrl', ['$http', '$filter', 'DormService', 'GarbageDutyService',
-    function ($http, $filter, DormService, GarbageDutyService) {
+  .controller('GarbageCtrl', ['$http', '$filter', 'DormService', 'GarbageDutyService', 'UserService',
+    function ($http, $filter, DormService, GarbageDutyService, UserService) {
     var mv = this;
     this.getData = function () {
       $http({method: 'GET', url: 'http://localhost:3000/garbage_bags.json'})
@@ -64,7 +64,8 @@ angular.module('dormManagementToolApp')
         console.log('failed to set garbage status');
       });
     };
-    this.emptyTrash = function (garbage_id, garbage_name, user_id) {
+    this.emptyTrash = function (garbage_id, garbage_name) {
+      var user_id = UserService.getId();
       var newResponsible = DormService.getNextResponsible(garbage_name, user_id);
       var bag = $filter('filter')(mv.bags, {name: garbage_name})[0];
       bag.status = 'ok';
