@@ -69,16 +69,16 @@ angular.module('dormManagementToolApp')
       var bag = $filter('filter')(mv.bags, {name: garbage_name})[0];
       bag.status = 'ok';
       bag.responsible.name = newResponsible.name;
-      bag.responsible.id = newResponsible.user_id;
+      bag.responsible.id = newResponsible.id;
       var body = JSON.stringify(
         {"garbage_bag": {
           "status": "ok",
-          "user_id": newResponsible.user_id
+          "user_id": newResponsible.id
           }
         });
       var url = 'http://localhost:3000/garbage_bags/' + garbage_id + '.json';
-      $http({method: 'PATCH', url: url, data: body}).then(function (response) {
-          //ok!
+      $http({method: 'PATCH', url: url, data: body}).then(function () {
+          console.log('successfully updated garbage bag status and responsible');
         },
         function () {
           console.log('failed to empty trash');

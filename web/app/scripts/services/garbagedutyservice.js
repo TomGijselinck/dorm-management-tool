@@ -23,12 +23,12 @@ angular.module('dormManagementToolApp')
             "datetime": datetime
           }
         });
-      var url = "http://localhost:3000/garbage_bag_duties.json"
+      var url = "http://localhost:3000/garbage_bag_duties.json";
       $http({method: 'POST', url: url, data: body}).then(function (response) {
         //ok!
       },
       function () {
-        concolse.log('failed to create new completed garbage bag duty');
+        console.log('failed to create new completed garbage bag duty');
       });
     };
   }]);
