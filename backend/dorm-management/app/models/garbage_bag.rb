@@ -5,5 +5,6 @@ class GarbageBag < ActiveRecord::Base
   validates_inclusion_of :status, :in => %w( ok full),
                          message: 'status should be either ok or full'
   belongs_to :user
+  belongs_to :dorm
   has_many :garbage_bag_duties
 end

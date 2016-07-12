@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711142630) do
+ActiveRecord::Schema.define(version: 20160712093631) do
 
   create_table "dorms", force: :cascade do |t|
     t.string   "name"
@@ -36,8 +36,10 @@ ActiveRecord::Schema.define(version: 20160711142630) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "dorm_id"
   end
 
+  add_index "garbage_bags", ["dorm_id"], name: "index_garbage_bags_on_dorm_id"
   add_index "garbage_bags", ["user_id"], name: "index_garbage_bags_on_user_id"
 
   create_table "inactive_weeks", force: :cascade do |t|
