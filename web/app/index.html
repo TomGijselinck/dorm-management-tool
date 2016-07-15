@@ -33,7 +33,17 @@
           <div>{{ app.userName }}</div>
         </div>
       </md-toolbar>
-      <md-list>
+      <md-list ng-click="app.toggleSidenav('left')">
+        <md-list-item>
+          <a ui-sref="dashboard">
+            <md-item-content md-ink-ripple md-hover layout="row" layout-align="start center">
+              <div class="inset">
+                <md-icon>dashboard</md-icon>
+              </div>
+              <div class="inset">Dashboard</div>
+            </md-item-content>
+          </a>
+        </md-list-item>
         <md-list-item>
           <a ng-click="app.logout()">
             <md-item-content md-ink-ripple layout="row" layout-align="start center">
