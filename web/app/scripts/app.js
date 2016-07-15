@@ -16,7 +16,7 @@ angular
     'ngMaterial',
     'ui.router'
   ])
-  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$mdDateLocaleProvider', function ($stateProvider, $urlRouterProvider, $mdDateLocaleProvider) {
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
@@ -30,6 +30,11 @@ angular
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl as login',
         authenticate: false
+      })
+      .state('inactive_periods', {
+        url: '/inactive_periods',
+        templateUrl: 'views/inactive_periods.html',
+        authenticate: true
       })
   }])
   .run(function ($rootScope, $state, AuthService) {

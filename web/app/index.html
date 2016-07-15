@@ -45,6 +45,16 @@
           </a>
         </md-list-item>
         <md-list-item>
+          <a ui-sref="inactive_periods">
+            <md-item-content md-ink-ripple md-hover layout="row" layout-align="start center">
+              <div class="inset">
+                <md-icon>event_busy</md-icon>
+              </div>
+              <div class="inset">Manage Inactive Periods</div>
+            </md-item-content>
+          </a>
+        </md-list-item>
+        <md-list-item>
           <a ng-click="app.logout()">
             <md-item-content md-ink-ripple layout="row" layout-align="start center">
               <div class="inset">
@@ -102,6 +112,7 @@
     <script src="scripts/services/userservice.js"></script>
     <script src="scripts/services/dormservice.js"></script>
     <script src="scripts/services/garbagedutyservice.js"></script>
+    <script src="scripts/controllers/inactiveperiods.js"></script>
     <!-- endbuild -->
 </body>
 </html>
