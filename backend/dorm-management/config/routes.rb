@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :garbage_bags
-  resources :inactive_weeks
   resources :users
   resources :garbage_bag_duties
   resources :dorms
