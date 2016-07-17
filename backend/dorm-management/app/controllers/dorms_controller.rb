@@ -2,7 +2,7 @@ class DormsController < ApplicationController
   include RailsApiAuth::Authentication
 
   before_action :authenticate!
-  before_action :set_dorm, only: [:show, :edit, :update, :destroy, :residents,
+  before_action :set_dorm, only: [:show, :update, :destroy, :residents,
                                   :residents_summary]
 
   def index
@@ -10,9 +10,7 @@ class DormsController < ApplicationController
   end
 
   def show
-  end
-
-  def edit
+    render :json => @dorm.to_json
   end
 
   def create
