@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   include RailsApiAuth::Authentication
 
   before_action :authenticate!, except: [:create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :duties]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :duties,
+                                  :inactive_periods]
 
   # GET /users
   # GET /users.json
@@ -74,6 +75,10 @@ class UsersController < ApplicationController
 
   def duties
     render json: @user.garbage_bag_duties
+  end
+
+  def inactive_periods
+    render json: @user.inactive_periods
   end
 
   private
