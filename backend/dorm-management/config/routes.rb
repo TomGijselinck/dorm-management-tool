@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resources :garbage_bag_duties
   resources :dorms
+  resources :inactive_periods
 
   post '/users/me', to: 'users#me'
   get 'users/:id/duties.json', to: 'users#duties'
