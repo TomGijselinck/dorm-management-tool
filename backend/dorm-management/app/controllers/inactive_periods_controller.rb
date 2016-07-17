@@ -42,6 +42,6 @@ class InactivePeriodsController < ApplicationController
     end
 
     def inactive_period_params
-      params.require(:inactive_period).permit(:start, :end)
+      params.require(:inactive_period).permit(:start, :end, :user_id)
     end
 end
