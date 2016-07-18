@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   before_action :authenticate!, except: [:create]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :duties,
-                                  :inactive_periods]
+                                  :inactive_periods, :garbage_bags]
 
   # GET /users
   # GET /users.json
@@ -75,6 +75,10 @@ class UsersController < ApplicationController
 
   def duties
     render json: @user.garbage_bag_duties
+  end
+
+  def garbage_bags
+    render json: @user.garbage_bags
   end
 
   def inactive_periods
