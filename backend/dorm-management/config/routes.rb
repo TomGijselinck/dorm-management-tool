@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :garbage_bags
   resources :users
   resources :garbage_bag_duties
@@ -11,6 +12,8 @@ Rails.application.routes.draw do
 
   get 'dorms/:id/residents.json', to: 'dorms#residents'
   get 'dorms/:id/residents_summary.json', to: 'dorms#residents_summary'
+
+  match '*path' => 'cors#preflight', :via => :options
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

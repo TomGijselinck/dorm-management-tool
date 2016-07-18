@@ -1,6 +1,8 @@
 class InactivePeriodsController < ApplicationController
   include RailsApiAuth::Authentication
 
+  allow_cors :update, :destroy
+
   before_action :authenticate!
   before_action :set_inactive_period, only: [:show, :update, :destroy]
 
