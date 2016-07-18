@@ -1,4 +1,5 @@
 class GarbageBag < ActiveRecord::Base
+  #TODO: name and dorm id combination should be unique instead of name unique
   validates :name, presence: true, length: { maximum: 50}, uniqueness: true
   validates :status, presence: true
   validates_presence_of :user, message: 'user should exist'
