@@ -14,7 +14,8 @@ angular
     'ngAria',
     'ngMessages',
     'ngMaterial',
-    'ui.router'
+    'ui.router',
+    'angularMoment'
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$mdDateLocaleProvider', function ($stateProvider, $urlRouterProvider, $mdDateLocaleProvider) {
     $urlRouterProvider.otherwise('/');
