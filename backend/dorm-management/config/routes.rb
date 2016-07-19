@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :inactive_periods
 
   post '/users/me', to: 'users#me'
+  post 'users/:id/get_token.json', to: 'users#get_token'
   get 'users/:id/duties.json', to: 'users#duties'
   get 'users/:id/inactive_periods.json', to: 'users#inactive_periods'
   get 'users/:id/garbage_bags.json', to: 'users#garbage_bags'

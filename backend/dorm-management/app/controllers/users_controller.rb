@@ -2,9 +2,9 @@ class UsersController < ApplicationController
 
   include RailsApiAuth::Authentication
 
-  before_action :authenticate!, except: [:create]
+  before_action :authenticate!, except: [:create, :get_token]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :duties,
-                                  :inactive_periods, :garbage_bags]
+                                  :inactive_periods, :garbage_bags, :get_token]
 
   # GET /users
   # GET /users.json
@@ -83,6 +83,16 @@ class UsersController < ApplicationController
 
   def inactive_periods
     render json: @user.inactive_periods
+  end
+
+  def get_token
+    if @user && @user.authenticate(user_params['password'])
+      jwt = 'awesome token!!'
+      render json: { token: jwt }, status: :ok
+    else
+      render json: { errors: 'The given credentials are incorrect' },
+             status: :unauthorized
+    end
   end
 
   private
