@@ -1,3 +1,5 @@
+require 'jwt'
+
 class ApplicationController < ActionController::Base
 
   # Prevent CSRF attacks by raising an exception.
@@ -27,5 +29,19 @@ class ApplicationController < ActionController::Base
     before_filter :cors_before_filter, :only => methods
     protect_from_forgery with: :null_session, :only => methods
   end
+
+  private
+    def check_for_valid_auth_token
+      authenticate_or_request_with_http_token do |token|
+        token = token.tr('= "', '')
+        @payload = JWT.decode(token, ENV['API_TOKEN_SECRET']).first
+        if @payload.nil? or not @payload.has_key? 'id'
+          return false
+        else
+          @payload = @payload.symbolize_keys
+          return true
+        end
+      end
+    end
 
 end

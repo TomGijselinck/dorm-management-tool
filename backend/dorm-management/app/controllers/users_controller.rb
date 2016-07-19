@@ -1,8 +1,10 @@
+require 'jwt'
+
 class UsersController < ApplicationController
 
   include RailsApiAuth::Authentication
 
-  before_action :authenticate!, except: [:create, :get_token]
+  before_action 'check_for_valid_auth_token', except: [:create, :get_token]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :duties,
                                   :inactive_periods, :garbage_bags, :get_token]
 
@@ -87,7 +89,8 @@ class UsersController < ApplicationController
 
   def get_token
     if @user && @user.authenticate(user_params['password'])
-      jwt = 'awesome token!!'
+      payload = { :id => @user.id, :exp => 24.hours.from_now.to_i }
+      jwt = JWT.encode(payload, ENV['API_TOKEN_SECRET'])
       render json: { token: jwt }, status: :ok
     else
       render json: { errors: 'The given credentials are incorrect' },

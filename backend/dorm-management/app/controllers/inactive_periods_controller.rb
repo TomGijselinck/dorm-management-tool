@@ -3,7 +3,7 @@ class InactivePeriodsController < ApplicationController
 
   allow_cors :update, :destroy
 
-  before_action :authenticate!
+  before_action 'check_for_valid_auth_token'
   before_action :set_inactive_period, only: [:show, :update, :destroy]
 
   def index

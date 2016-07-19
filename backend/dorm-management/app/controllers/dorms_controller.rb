@@ -1,7 +1,7 @@
 class DormsController < ApplicationController
   include RailsApiAuth::Authentication
 
-  before_action :authenticate!
+  before_action 'check_for_valid_auth_token'
   before_action :set_dorm, only: [:show, :update, :destroy, :residents,
                                   :residents_summary]
 
