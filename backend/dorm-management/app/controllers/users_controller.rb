@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   before_action 'check_for_valid_auth_token', except: [:create, :get_token]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :duties,
-                                  :inactive_periods, :garbage_bags, :get_token]
+                                  :inactive_periods, :garbage_bags]
 
   # GET /users
   # GET /users.json
@@ -88,6 +88,11 @@ class UsersController < ApplicationController
   end
 
   def get_token
+    if user_params['id']
+      @user = User.find_by_id user_params['id']
+    elsif user_params['email']
+      @user = User.find_by_email user_params['email']
+    end
     if @user && @user.authenticate(user_params['password'])
       payload = { :id => @user.id, :exp => 24.hours.from_now.to_i }
       jwt = JWT.encode(payload, ENV['API_TOKEN_SECRET'])
