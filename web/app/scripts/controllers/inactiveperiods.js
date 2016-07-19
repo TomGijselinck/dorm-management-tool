@@ -16,7 +16,7 @@ angular.module('dormManagementToolApp')
   .controller('InactiveperiodsCtrl', ['UserService', '$http', '$filter', function (UserService, $http, $filter) {
     var mv = this;
     this.getData = function () {
-      $http({method: 'GET', url: 'http://localhost:3000/inactive_periods.json'})
+      $http({method: 'GET', url: 'http://localhost:3000/users/' + UserService.getId() + '/inactive_periods.json'})
         .then(function (response) {
           mv.periods = response.data;
         },
