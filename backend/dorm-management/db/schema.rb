@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160717180226) do
+ActiveRecord::Schema.define(version: 20160719203729) do
 
   create_table "dorms", force: :cascade do |t|
     t.string   "name"
@@ -51,18 +51,6 @@ ActiveRecord::Schema.define(version: 20160717180226) do
   end
 
   add_index "inactive_periods", ["user_id"], name: "index_inactive_periods_on_user_id"
-
-  create_table "logins", force: :cascade do |t|
-    t.string   "identification",          null: false
-    t.string   "password_digest"
-    t.string   "oauth2_token",            null: false
-    t.string   "uid"
-    t.string   "single_use_oauth2_token"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "provider"
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

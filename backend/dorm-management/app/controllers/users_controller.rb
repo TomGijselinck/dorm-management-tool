@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
-      if @user.save & @user.create_login(login_params)
+      if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -110,7 +110,4 @@ class UsersController < ApplicationController
                                    :password_confirmation, :dorm_id)
     end
 
-    def login_params
-      params.require(:user).permit(:identification, :password, :password_confirmation)
-    end
 end
