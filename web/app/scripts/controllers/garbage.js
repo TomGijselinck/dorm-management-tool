@@ -10,7 +10,7 @@
 angular.module('dormManagementToolApp')
   .run(function($http) {
     if (localStorage.getItem('token')) {
-      $http.defaults.headers.common.Authorization = 'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token;
+      $http.defaults.headers.common.Authorization = 'Token = ' + JSON.parse(localStorage.getItem('token')).token;
     }
   })
   .controller('GarbageCtrl', ['$http', '$filter', '$mdDialog', 'DormService', 'GarbageDutyService', 'UserService',
