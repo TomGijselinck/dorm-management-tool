@@ -12,12 +12,36 @@ angular.module('dormManagementToolApp')
     var mv = this;
     this.user = JSON.parse(localStorage.getItem('user'));
     this.getName = function () {
-      return mv.user.name;
+      if (localStorage.getItem('user'))
+        if (mv.user != null)
+          return mv.user.name;
+        else {
+          mv.user = JSON.parse(localStorage.getItem('user'));
+          return mv.user.name
+        }
+      else
+        return null
     };
     this.getId = function () {
-      return mv.user.id;
+      if (localStorage.getItem('user'))
+        if (mv.user != null)
+          return mv.user.id;
+        else {
+          mv.user = JSON.parse(localStorage.getItem('user'));
+          return mv.user.id
+        }
+      else
+        return null
     };
     this.getDormId = function () {
-      return mv.user.dorm_id;
+      if (localStorage.getItem('user'))
+        if (mv.user != null)
+          return mv.user.dorm_id;
+        else {
+          mv.user = JSON.parse(localStorage.getItem('user'));
+          return mv.user.dorm_id
+        }
+      else
+        return null
     };
   });
