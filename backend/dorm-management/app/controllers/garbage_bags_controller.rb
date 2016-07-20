@@ -42,8 +42,12 @@ class GarbageBagsController < ApplicationController
   # PATCH/PUT /garbage_bags/1
   # PATCH/PUT /garbage_bags/1.json
   def update
+    user_id = @garbage_bag.user_id
     respond_to do |format|
       if @garbage_bag.update(garbage_bag_params)
+        if user_id != @garbage_bag.user_id
+          UserMailer.new_duty(@garbage_bag).deliver_later
+        end
         format.html { redirect_to @garbage_bag, notice: 'Garbage bag was successfully updated.' }
         format.json { render :show, status: :ok, location: @garbage_bag }
       else
