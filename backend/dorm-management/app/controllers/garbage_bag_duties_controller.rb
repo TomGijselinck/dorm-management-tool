@@ -1,5 +1,4 @@
 class GarbageBagDutiesController < ApplicationController
-  include RailsApiAuth::Authentication
 
   before_action 'check_for_valid_auth_token'
   before_action :set_garbage_bag_duty, only: [:show, :update, :destroy]

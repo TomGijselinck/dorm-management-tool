@@ -2,8 +2,6 @@ require 'jwt'
 
 class UsersController < ApplicationController
 
-  include RailsApiAuth::Authentication
-
   before_action 'check_for_valid_auth_token', except: [:create, :get_token]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :duties,
                                   :inactive_periods, :garbage_bags]

@@ -1,5 +1,4 @@
 class InactivePeriodsController < ApplicationController
-  include RailsApiAuth::Authentication
 
   allow_cors :update, :destroy
 
