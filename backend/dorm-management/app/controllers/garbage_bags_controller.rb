@@ -47,6 +47,8 @@ class GarbageBagsController < ApplicationController
       if @garbage_bag.update(garbage_bag_params)
         if user_id != @garbage_bag.user_id
           UserMailer.new_duty(@garbage_bag).deliver_later
+        elsif @garbage_bag.status == 'full'
+          UserMailer.garbage_bag_full(@garbage_bag).deliver_later
         end
         format.html { redirect_to @garbage_bag, notice: 'Garbage bag was successfully updated.' }
         format.json { render :show, status: :ok, location: @garbage_bag }

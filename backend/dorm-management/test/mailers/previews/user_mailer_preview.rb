@@ -3,4 +3,8 @@ class UserMailerPreview < ActionMailer::Preview
   def new_duty_preview
     UserMailer.new_duty(GarbageBag.first)
   end
+
+  def garbage_full_preview
+    UserMailer.garbage_bag_full(GarbageBag.first)
+  end
 end
