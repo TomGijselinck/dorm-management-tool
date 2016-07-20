@@ -51,7 +51,7 @@ angular
       }
     })
   })
-  .controller('AppCtrl', ['$mdSidenav', '$state', 'UserService', function ($mdSidenav, $state, UserService) {
+  .controller('AppCtrl', ['$mdSidenav', '$state', 'UserService', '$http', function ($mdSidenav, $state, UserService, $http) {
     this.toggleSidenav = function (menuId) {
       $mdSidenav(menuId).toggle();
     };
@@ -60,4 +60,20 @@ angular
       $state.go('login');
     };
     this.userName = UserService.getName();
+    this.invalid_token = function () {
+      if (!localStorage.getItem('token')) return false;
+      $http.defaults.headers.common.Authorization = 'Token =  ' + JSON.parse(localStorage.getItem('token')).token;
+      $http({method: 'GET', url: 'http://localhost:3000/users/' + UserService.getId() + '/valid_token'})
+        .then(
+          function () {
+            console.log('valid token');
+            return false
+          },
+          function () {
+            console.log('invalid token');
+            return true
+          });
+    };
+    if (this.invalid_token())
+      $state.go('login');
   }]);
