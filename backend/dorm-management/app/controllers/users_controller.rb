@@ -105,6 +105,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def valid_token
+    puts @payload[:id], params[:id]
+    if check_for_valid_auth_token && @payload[:id].to_i.equal?(params[:id].to_i)
+      render json: {'status': 'valid token'}, status: :ok
+    else
+      render json: {'status': 'not a valid token'}, status: :unauthorized
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
