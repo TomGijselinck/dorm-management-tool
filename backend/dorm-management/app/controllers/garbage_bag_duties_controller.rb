@@ -16,6 +16,7 @@ class GarbageBagDutiesController < ApplicationController
   def create
     @garbage_bag_duty = GarbageBagDuty.new(garbage_bag_duty_params)
     if @garbage_bag_duty.save
+      UserMailer.new_duty(@garbage_bag_duty.garbage_bag).deliver_later
       render json: {status: :created, location: garbage_bag_url(@garbage_bag_duty)}
     else
       render json: @garbage_bag_duty.errors, status: :unprocessable_entity
