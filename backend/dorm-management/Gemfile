@@ -31,6 +31,8 @@ gem 'rack-cors', :require => 'rack/cors'
 # A ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard.
 gem 'jwt'
 
+gem 'passenger', '>= 5.0.25', require: 'phusion_passenger/rack_handler'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
