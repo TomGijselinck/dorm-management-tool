@@ -36,8 +36,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-
+    new_params = user_params
+    if params['user']['dorm_name']
+      dorm = Dorm.find_by_name params['user']['dorm_name']
+      new_params[:dorm_id] = dorm.id
+    end
+    @user = User.new(new_params)
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }

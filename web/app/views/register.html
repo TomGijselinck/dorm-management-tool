@@ -1,33 +1,40 @@
-<div class="flexbox-parent" ng-controller="RegisterCtrl as register">
+<div class="flexbox-parent" ng-controller="RegisterCtrl as new_user">
   <div layout="row" layout-align="center">
     <h2>Register New User</h2>
   </div>
   <div layout="row" layout-align="center center">
     <md-content layout="column" layout-padding>
       <form name="register" layout="column">
+        <md-input-container>
+          <label>Dorm Name</label>
+          <input type="text" ng-model="new_user.dorm_name">
+        </md-input-container>
         <div layout-xs="column" layout-gt-xs="row">
           <md-input-container>
             <label>Name</label>
-            <input type="text" ng-model="register.name">
+            <input type="text" ng-model="new_user.name">
           </md-input-container>
           <md-input-container>
             <label>Email</label>
-            <input type="text" ng-model="register.email">
+            <input type="text" ng-model="new_user.email">
           </md-input-container>
         </div>
         <div layout-xs="column" layout-gt-xs="row">
           <md-input-container>
             <label>Password</label>
-            <input type="password" ng-model="register.password">
+            <input type="password" ng-model="new_user.password">
           </md-input-container>
           <md-input-container>
             <label>Password Confirmation</label>
-            <input type="password" ng-model="register.password_confirmation">
+            <input type="password" ng-model="new_user.password_confirmation">
           </md-input-container>
         </div>
-        <p ng-if="register.message">{{register.message}}</p>
+        <p ng-if="new_user.message">{{new_user.message}}</p>
         <md-button class="md-primary md-raised"
-                   ng-click="register.createUser(register.name, register.password)">Register</md-button>
+                   ng-click="new_user.createUser(new_user.dorm_name, new_user.name, new_user.email,
+                             new_user.password, new_user.password_confirmation)">
+          Register
+        </md-button>
       </form>
     </md-content>
   </div>
