@@ -17,8 +17,8 @@
                      ng-click="garbageBag.status='full'; garbage.setStatus(garbageBag.id, 'full')">full</md-button>
         </p>
         <div flex-gt-xs="35" layout-align="left">
-          <h3>{{garbageBag.name | uppercase}}</h3>
-          <p>(<i>Assigned to <b>{{garbageBag.responsible.name}}</b></i>)</p>
+          <span><b>{{garbageBag.name | uppercase}}</b> </span>
+          <span>(<i>Assigned to <b>{{garbageBag.responsible.name}}</b></i>)</span>
         </div>
         <!--TODO: warning if not full-->
         <!--TODO: and add warning if other id than assigned-->
