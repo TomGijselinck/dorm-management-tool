@@ -86,8 +86,8 @@ class UsersController < ApplicationController
   end
 
   def get_token
-    if user_params['id']
-      @user = User.find_by_id user_params['id']
+    if params['id']
+      @user = User.find_by_id params['id']
     elsif user_params['email']
       @user = User.find_by_email user_params['email']
     end
