@@ -1,9 +1,10 @@
+require 'jwt'
+
 class UsersController < ApplicationController
 
-  include RailsApiAuth::Authentication
-
-  before_action :authenticate!, except: [:create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action 'check_for_valid_auth_token', except: [:create, :get_token]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :duties,
+                                  :inactive_periods, :garbage_bags]
 
   # GET /users
   # GET /users.json
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
-      if @user.save & @user.create_login(login_params)
+      if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -72,6 +73,34 @@ class UsersController < ApplicationController
     end
   end
 
+  def duties
+    render json: @user.garbage_bag_duties
+  end
+
+  def garbage_bags
+    render json: @user.garbage_bags
+  end
+
+  def inactive_periods
+    render json: @user.inactive_periods
+  end
+
+  def get_token
+    if user_params['id']
+      @user = User.find_by_id user_params['id']
+    elsif user_params['email']
+      @user = User.find_by_email user_params['email']
+    end
+    if @user && @user.authenticate(user_params['password'])
+      payload = { :id => @user.id, :exp => 24.hours.from_now.to_i }
+      jwt = JWT.encode(payload, ENV['API_TOKEN_SECRET'])
+      render json: { token: jwt }, status: :ok
+    else
+      render json: { errors: 'The given credentials are incorrect' },
+             status: :unauthorized
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -80,10 +109,8 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password,
+                                   :password_confirmation, :dorm_id)
     end
 
-    def login_params
-      params.require(:user).permit(:identification, :password, :password_confirmation)
-    end
 end

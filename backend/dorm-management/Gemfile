@@ -28,7 +28,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'rack-cors', :require => 'rack/cors'
 
-gem 'rails_api_auth'
+# A ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard.
+gem 'jwt'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

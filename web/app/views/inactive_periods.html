@@ -1,0 +1,31 @@
+<md-content ng-controller="InactiveperiodsCtrl as inactive_periods" layout="column" layout-gt-sm="row"
+            layout-padding="5px" ng-init="inactive_periods.getData()">
+  <div flex-md="50" flex-lg="30" layout="column" layout-padding="10px">
+    <md-card>
+      <md-card-header>
+        <md-card-header-text>
+          <span class="md-title">Inactive Periods</span>
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-content>
+        <md-list>
+          <md-list-item layout="row" layout-xs="column">
+            <md-datepicker ng-model="inactive_periods.start" md-placeholder="start date"></md-datepicker>
+            <md-datepicker ng-model="inactive_periods.end" md-placeholder="end date"></md-datepicker>
+            <md-button ng-click="inactive_periods.create(inactive_periods.start, inactive_periods.end)"
+                       class="md-raised md-primary">add</md-button>
+          </md-list-item>
+          <h3>Current Inactive Periods</h3>
+          <md-list-item ng-repeat="period in inactive_periods.periods" layout="row" layout-xs="column">
+            <md-datepicker ng-model="period.start" md-placeholder="start date"></md-datepicker>
+            <md-datepicker ng-model="period.end" md-placeholder="end date"></md-datepicker>
+            <div layout="row">
+              <md-button ng-click="inactive_periods.save(period.id, period.start, period.end)" class="md-raised">save</md-button>
+              <md-button ng-click="inactive_periods.delete(period.id)" class="md-raised">delete</md-button>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-card-content>
+    </md-card>
+  </div>
+</md-content>

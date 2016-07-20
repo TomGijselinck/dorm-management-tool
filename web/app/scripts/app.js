@@ -14,9 +14,10 @@ angular
     'ngAria',
     'ngMessages',
     'ngMaterial',
-    'ui.router'
+    'ui.router',
+    'angularMoment'
   ])
-  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$mdDateLocaleProvider', function ($stateProvider, $urlRouterProvider, $mdDateLocaleProvider) {
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
@@ -30,6 +31,11 @@ angular
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl as login',
         authenticate: false
+      })
+      .state('inactive_periods', {
+        url: '/inactive_periods',
+        templateUrl: 'views/inactive_periods.html',
+        authenticate: true
       })
       .state('register', {
         url: '/register',

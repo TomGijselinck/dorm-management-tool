@@ -9,7 +9,15 @@
  */
 angular.module('dormManagementToolApp')
   .service('UserService', function () {
+    var mv = this;
+    this.user = JSON.parse(localStorage.getItem('user'));
     this.getName = function () {
-      return JSON.parse(localStorage.getItem('user')).name;
-    }
+      return mv.user.name;
+    };
+    this.getId = function () {
+      return mv.user.id;
+    };
+    this.getDormId = function () {
+      return mv.user.dorm_id;
+    };
   });

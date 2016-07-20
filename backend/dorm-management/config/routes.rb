@@ -1,9 +1,22 @@
 Rails.application.routes.draw do
+
   resources :garbage_bags
-  resources :inactive_weeks
   resources :users
+  resources :garbage_bag_duties
+  resources :dorms
+  resources :inactive_periods
 
   post '/users/me', to: 'users#me'
+  post 'users/:id/token.json', to: 'users#get_token'
+  post 'users/token.json', to: 'users#get_token'
+  get 'users/:id/duties.json', to: 'users#duties'
+  get 'users/:id/inactive_periods.json', to: 'users#inactive_periods'
+  get 'users/:id/garbage_bags.json', to: 'users#garbage_bags'
+
+  get 'dorms/:id/residents.json', to: 'dorms#residents'
+  get 'dorms/:id/residents_summary.json', to: 'dorms#residents_summary'
+
+  match '*path' => 'cors#preflight', :via => :options
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

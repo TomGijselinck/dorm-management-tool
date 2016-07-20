@@ -33,7 +33,27 @@
           <div>{{ app.userName }}</div>
         </div>
       </md-toolbar>
-      <md-list>
+      <md-list ng-click="app.toggleSidenav('left')">
+        <md-list-item>
+          <a ui-sref="dashboard">
+            <md-item-content md-ink-ripple md-hover layout="row" layout-align="start center">
+              <div class="inset">
+                <md-icon>dashboard</md-icon>
+              </div>
+              <div class="inset">Dashboard</div>
+            </md-item-content>
+          </a>
+        </md-list-item>
+        <md-list-item>
+          <a ui-sref="inactive_periods">
+            <md-item-content md-ink-ripple md-hover layout="row" layout-align="start center">
+              <div class="inset">
+                <md-icon>event_busy</md-icon>
+              </div>
+              <div class="inset">Manage Inactive Periods</div>
+            </md-item-content>
+          </a>
+        </md-list-item>
         <md-list-item>
           <a ng-click="app.logout()">
             <md-item-content md-ink-ripple layout="row" layout-align="start center">
@@ -52,7 +72,7 @@
         <md-button ng-click="app.toggleSidenav('left')" hide-gt-md aria-label="Menu" class="md-icon-button">
           <md-icon>menu</md-icon>
         </md-button>
-        <h1>Dorm Management Tool</h1>
+        <h1 ui-sref="dashboard" md-ink-ripple>Dorm Management Tool</h1>
       </md-toolbar>
 
       <md-content>
@@ -79,6 +99,8 @@
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -90,6 +112,9 @@
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/services/authservice.js"></script>
     <script src="scripts/services/userservice.js"></script>
+    <script src="scripts/services/dormservice.js"></script>
+    <script src="scripts/services/garbagedutyservice.js"></script>
+    <script src="scripts/controllers/inactiveperiods.js"></script>
     <!-- endbuild -->
 </body>
 </html>

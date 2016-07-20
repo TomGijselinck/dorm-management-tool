@@ -17,10 +17,16 @@
                      ng-click="garbageBag.status='full'; garbage.setStatus(garbageBag.id, 'full')">full</md-button>
         </p>
         <div flex-gt-xs="35" layout-align="left">
-          <h3>{{garbageBag.name}} waste bags</h3>
-          <p>(<i>Assigned to <b>{{garbageBag.responsible}}</b></i>)</p>
+          <h3>{{garbageBag.name | uppercase}} waste bags</h3>
+          <p>(<i>Assigned to <b>{{garbageBag.responsible.name}}</b></i>)</p>
         </div>
-        <md-button flex-gt-xs="20" class="md-raised">Empty Trash</md-button>
+        <!--TODO: warning if not full-->
+        <!--TODO: and add warning if other id than assigned-->
+        <md-button flex-gt-xs="20" class="md-raised"
+                   ng-click="garbage.tryToEmptyTrash(garbageBag.id, garbageBag.name,garbageBag.responsible.id,
+                                                     garbageBag.status, $event)">
+          Empty Trash
+        </md-button>
       </md-list-item>
       <md-divider></md-divider>
     </md-list>

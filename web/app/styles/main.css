@@ -127,3 +127,21 @@ md-content.md-default-theme, md-content, body {
 md-sidenav {
   fill: #737373;
 }
+
+md-sidenav > md-list > md-list-item a {
+  color: black;
+  text-decoration: none;
+}
+
+md-sidenav > md-list > md-list-item:hover {
+  background-color: #f0f0f0;
+}
+
+md-sidenav > md-list > md-list-item a:focus, :focus {
+  outline: none;
+  border: 0;
+}
+
+md-toolbar h1 {
+  cursor: pointer;
+}

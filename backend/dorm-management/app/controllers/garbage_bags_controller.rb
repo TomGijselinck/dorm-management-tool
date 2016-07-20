@@ -1,8 +1,6 @@
 class GarbageBagsController < ApplicationController
 
-  include RailsApiAuth::Authentication
-
-  before_action :authenticate!
+  before_action 'check_for_valid_auth_token'
   before_action :set_garbage_bag, only: [:show, :edit, :update, :destroy]
 
   # GET /garbage_bags
@@ -44,8 +42,14 @@ class GarbageBagsController < ApplicationController
   # PATCH/PUT /garbage_bags/1
   # PATCH/PUT /garbage_bags/1.json
   def update
+    user_id = @garbage_bag.user_id
     respond_to do |format|
       if @garbage_bag.update(garbage_bag_params)
+        if user_id != @garbage_bag.user_id
+          UserMailer.new_duty(@garbage_bag).deliver_later
+        elsif @garbage_bag.status == 'full'
+          UserMailer.garbage_bag_full(@garbage_bag).deliver_later
+        end
         format.html { redirect_to @garbage_bag, notice: 'Garbage bag was successfully updated.' }
         format.json { render :show, status: :ok, location: @garbage_bag }
       else
@@ -73,6 +77,6 @@ class GarbageBagsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def garbage_bag_params
-      params.require(:garbage_bag).permit(:name, :status, :user_id)
+      params.require(:garbage_bag).permit(:name, :status, :user_id, :dorm_id)
     end
 end

@@ -12,15 +12,22 @@ angular.module('dormManagementToolApp')
     this.error = false;
     var mv = this;
     this.login = function (email, password) {
-      var body = JSON.stringify({"grant_type": "password", "username": email, "password": password});
-      var url = 'http://localhost:3000/token';
+      var body = JSON.stringify(
+        {
+          "user": {
+            "email": email,
+            "password": password
+          }
+        }
+      );
+      var url = 'http://localhost:3000/users/token.json';
       $http({method: 'POST', url: url, data: body})
         .then(
           function (response) {
             // localStorage.setItem('token', JSON.stringify(response.data));
             storeToken(JSON.stringify(response.data)).then(function () {
               $http.defaults.headers.common.Authorization =
-                'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token;
+                'Token = ' + JSON.parse(localStorage.getItem('token')).token;
               $http({method: 'POST', url: 'http://localhost:3000/users/me.json',
                 data: JSON.stringify({"email": email})})
                 .then(

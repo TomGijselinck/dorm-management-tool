@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class InactiveWeekTest < ActiveSupport::TestCase
+class DormsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end
