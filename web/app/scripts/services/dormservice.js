@@ -67,10 +67,13 @@ angular.module('dormManagementToolApp')
         var responsible = null;
         var min = Infinity;
         for (var i = 0; i < mv.residents.length; i++) {
-          for (var j = 0; j < mv.residents[i].garbage_bag_duties.length; j++) {
-            if (mv.residents[i].garbage_bag_duties[j].name == bag_name && mv.residents[i].garbage_bag_duties[j].completed < min) {
-              responsible = i;
-              min = mv.residents[i].garbage_bag_duties[j].completed;
+          //TODO: catch exception if no one is active
+          if (mv.residents[i].active) {
+            for (var j = 0; j < mv.residents[i].garbage_bag_duties.length; j++) {
+              if (mv.residents[i].garbage_bag_duties[j].name == bag_name && mv.residents[i].garbage_bag_duties[j].completed < min) {
+                responsible = i;
+                min = mv.residents[i].garbage_bag_duties[j].completed;
+              }
             }
           }
         }
