@@ -44,6 +44,7 @@ class DormsController < ApplicationController
       resident_summary = {}
       resident_summary[:id] = user.id
       resident_summary[:name] = user.name
+      resident_summary[:active] = is_active user
       duty_summary = []
       tomorrow = Date.tomorrow
       if [7, 8, 9].include?(tomorrow.month) # summer
@@ -80,4 +81,14 @@ class DormsController < ApplicationController
     def dorm_params
       params.require(:dorm).permit(:name, :user_id)
     end
+
+  def is_active(user)
+    user.inactive_periods.each do |period|
+      if (period.start .. period.end).cover?(Date.today)
+        return false
+      end
+    end
+    true
+  end
+  
 end
