@@ -63,7 +63,7 @@ angular
     this.invalid_token = function () {
       if (!localStorage.getItem('token')) return false;
       $http.defaults.headers.common.Authorization = 'Token =  ' + JSON.parse(localStorage.getItem('token')).token;
-      $http({method: 'GET', url: 'http://localhost:3000/users/' + UserService.getId() + '/valid_token'})
+      $http({method: 'GET', url: 'https://tomgijselinck.com/dorm-manager/api/users/' + UserService.getId() + '/valid_token'})
         .then(
           function () {
             console.log('valid token');

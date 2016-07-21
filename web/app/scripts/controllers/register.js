@@ -20,7 +20,7 @@ angular.module('dormManagementToolApp')
             "password_confirmation": password_confirmation
           }
         });
-      var url = 'http://localhost:3000/users.json';
+      var url = 'https://tomgijselinck.com/dorm-manager/api/users.json';
       $http.defaults.headers.common.Authorization =
         'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token;
       $http({method: 'POST', url: url, data: body})

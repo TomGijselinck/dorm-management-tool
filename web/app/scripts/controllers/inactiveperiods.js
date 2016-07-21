@@ -16,7 +16,7 @@ angular.module('dormManagementToolApp')
   .controller('InactiveperiodsCtrl', ['UserService', '$http', '$filter', function (UserService, $http, $filter) {
     var mv = this;
     this.getData = function () {
-      $http({method: 'GET', url: 'http://localhost:3000/users/' + UserService.getId() + '/inactive_periods.json'})
+      $http({method: 'GET', url: 'https://tomgijselinck.com/dorm-manager/api/users/' + UserService.getId() + '/inactive_periods.json'})
         .then(function (response) {
           mv.periods = response.data;
         },
@@ -61,7 +61,7 @@ angular.module('dormManagementToolApp')
         "user_id": UserService.getId()
       };
       var body = JSON.stringify({"inactive_period": period});
-      var url = "http://localhost:3000/inactive_periods.json";
+      var url = "https://tomgijselinck.com/dorm-manager/api/inactive_periods.json";
       $http({method: 'POST', url: url, data: body}).then(function (response) {
         //ok
       },
@@ -83,7 +83,7 @@ angular.module('dormManagementToolApp')
           }
         }
       );
-      $http({method: 'PATCH', url: 'http://localhost:3000/inactive_periods/' + id + '.json', data: body})
+      $http({method: 'PATCH', url: 'https://tomgijselinck.com/dorm-manager/api/inactive_periods/' + id + '.json', data: body})
         .then(function () {
           console.log('successfully saved inactive period');
         },
@@ -94,7 +94,7 @@ angular.module('dormManagementToolApp')
     this.delete = function (id) {
       var period = $filter('filter')(mv.periods, {id: id})[0];
       mv.periods.splice(mv.periods.indexOf(period), 1);
-      $http({method: 'DELETE', url: 'http://localhost:3000/inactive_periods/' + id + '.json'})
+      $http({method: 'DELETE', url: 'https://tomgijselinck.com/dorm-manager/api/inactive_periods/' + id + '.json'})
         .then(function () {
           console.log('successfully removed inactive period');
         },

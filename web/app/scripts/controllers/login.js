@@ -20,7 +20,7 @@ angular.module('dormManagementToolApp')
           }
         }
       );
-      var url = 'http://localhost:3000/users/token.json';
+      var url = 'https://tomgijselinck.com/dorm-manager/api/users/token.json';
       $http({method: 'POST', url: url, data: body})
         .then(
           function (response) {
@@ -28,7 +28,7 @@ angular.module('dormManagementToolApp')
             storeToken(JSON.stringify(response.data)).then(function () {
               $http.defaults.headers.common.Authorization =
                 'Token = ' + JSON.parse(localStorage.getItem('token')).token;
-              $http({method: 'POST', url: 'http://localhost:3000/users/me.json',
+              $http({method: 'POST', url: 'https://tomgijselinck.com/dorm-manager/api/users/me.json',
                 data: JSON.stringify({"email": email})})
                 .then(
                   function (response) {

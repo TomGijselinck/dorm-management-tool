@@ -23,7 +23,7 @@ angular.module('dormManagementToolApp')
             "datetime": datetime
           }
         });
-      var url = "http://localhost:3000/garbage_bag_duties.json";
+      var url = "https://tomgijselinck.com/dorm-manager/api/garbage_bag_duties.json";
       $http({method: 'POST', url: url, data: body}).then(function (response) {
         //ok!
       },

@@ -13,7 +13,7 @@ angular.module('dormManagementToolApp')
       var mv = this;
       this.dormId = UserService.getDormId();
       this.getData = function () {
-        $http({method: 'GET', url: 'http://localhost:3000/dorms/'+mv.dormId+'/residents_summary.json'})
+        $http({method: 'GET', url: 'https://tomgijselinck.com/dorm-manager/api/dorms/'+mv.dormId+'/residents_summary.json'})
           .then(function (response) {
             mv.residents = response.data;
           },

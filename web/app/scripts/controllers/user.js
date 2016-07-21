@@ -18,7 +18,7 @@ angular.module('dormManagementToolApp')
     this.name = UserService.getName();
     this.getData = function () {
       $http({method: 'GET',
-             url: 'http://localhost:3000/users/' + UserService.getId() + '/garbage_bags.json'}).then(function (response) {
+             url: 'https://tomgijselinck.com/dorm-manager/api/users/' + UserService.getId() + '/garbage_bags.json'}).then(function (response) {
         mv.duties = response.data;
       },
       function () {
