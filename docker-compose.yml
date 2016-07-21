@@ -1,0 +1,13 @@
+db:
+  image: mysql:5.7
+  environment:
+     - MYSQL_ROOT_PASSWORD="${DM_MYSQL_ROOT_PW}"
+     - MYSQL_DATABASE="${DM_MYSQL_DATABASE}"
+backend:
+  build: ./backend/dorm-management
+  ports:
+    - "3000:3000"
+  links:
+    - db
+  volumes:
+    - ./backend/dorm-management:/app/backend

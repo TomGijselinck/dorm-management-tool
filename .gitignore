@@ -38,3 +38,6 @@ jspm_packages
 
 # IDE conf files
 .idea
+
+# env variables
+.env
