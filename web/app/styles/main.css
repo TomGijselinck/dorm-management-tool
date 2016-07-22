@@ -145,3 +145,7 @@ md-sidenav > md-list > md-list-item a:focus, :focus {
 md-toolbar h1 {
   cursor: pointer;
 }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

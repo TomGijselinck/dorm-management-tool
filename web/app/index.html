@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
   </head>
-  <body ng-app="dormManagementToolApp" layout="row" ng-cloak
+  <body ng-app="dormManagementToolApp" layout="row"
         ng-controller="AppCtrl as app">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -25,12 +25,12 @@
 
     <!-- Add your site or application content here -->
     <md-sidenav layout="column" class="md-sidenav-left" md-component-id="left"
-                md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="8">
+                md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="8" ng-cloak>
       <md-toolbar class="md-tall md-hue-2">
         <span flex></span>
         <div layout="column" class="md-toolbar-tools-bottom inset">
           <span></span>
-          <div>{{ app.userName }}</div>
+          <div ng-cloak>{{ app.userName }}</div>
         </div>
       </md-toolbar>
       <md-list ng-click="app.toggleSidenav('left')">
@@ -68,7 +68,7 @@
     </md-sidenav>
 
     <div layout="column" class="relative" layout-fill>
-      <md-toolbar layout-padding="20" layout-align="left center" layout="row">
+      <md-toolbar layout-padding="20" layout-align="left center" layout="row" ng-cloak>
         <md-button ng-click="app.toggleSidenav('left')" hide-gt-md aria-label="Menu" class="md-icon-button">
           <md-icon>menu</md-icon>
         </md-button>
