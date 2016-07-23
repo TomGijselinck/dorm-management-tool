@@ -15,7 +15,8 @@ angular
     'ngMessages',
     'ngMaterial',
     'ui.router',
-    'angularMoment'
+    'angularMoment',
+    'config'
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$mdDateLocaleProvider', function ($stateProvider, $urlRouterProvider, $mdDateLocaleProvider) {
     $urlRouterProvider.otherwise('/');
@@ -51,7 +52,7 @@ angular
       }
     })
   })
-  .controller('AppCtrl', ['$mdSidenav', '$state', 'UserService', '$http', '$q', function ($mdSidenav, $state, UserService, $http, $q) {
+  .controller('AppCtrl', ['$mdSidenav', '$state', 'UserService', '$http', '$q', 'ENV', function ($mdSidenav, $state, UserService, $http, $q, ENV) {
     this.toggleSidenav = function (menuId) {
       $mdSidenav(menuId).toggle();
     };
@@ -76,7 +77,7 @@ angular
         $http.defaults.headers.common.Authorization = 'Token =  ' + JSON.parse(localStorage.getItem('token')).token;
         $http({
           method: 'GET',
-          url: 'https://tomgijselinck.com/dorm-manager/api/users/' + UserService.getId() + '/valid_token'
+          url: ENV.apiEndpoint + '/users/' + UserService.getId() + '/valid_token'
         })
           .then(
             function () {

@@ -8,7 +8,7 @@
  * Controller of the dormManagementToolApp
  */
 angular.module('dormManagementToolApp')
-  .controller('RegisterCtrl', ['$http', '$state', function ($http, $state) {
+  .controller('RegisterCtrl', ['$http', '$state', 'ENV', function ($http, $state, ENV) {
     this.createUser = function (dorm_name, name, email, password, password_confirmation) {
       var body = JSON.stringify(
         {"user":
@@ -20,7 +20,7 @@ angular.module('dormManagementToolApp')
             "password_confirmation": password_confirmation
           }
         });
-      var url = 'https://tomgijselinck.com/dorm-manager/api/users.json';
+      var url = ENV.apiEndpoint + '/users.json';
       $http.defaults.headers.common.Authorization =
         'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token;
       $http({method: 'POST', url: url, data: body})

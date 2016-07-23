@@ -19,6 +19,8 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn'
   });
 
+  grunt.loadNpmTasks('grunt-ng-constant');
+
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
@@ -220,7 +222,7 @@ module.exports = function (grunt) {
             }
           }
       }
-    }, 
+    },
 
     // Renames files for browser caching purposes
     filerev: {
@@ -418,6 +420,36 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    // environment specific configuration
+    ngconstant: {
+      // Options for all targets
+      options: {
+        name: 'config'
+      },
+      development: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/config.js'
+        },
+        constants: {
+          ENV: {
+            name: 'development',
+            apiEndpoint: 'http://localhost:3000'
+          }
+        }
+      },
+      production: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/config.js'
+        },
+        constants: {
+          ENV: {
+            name: 'production',
+            apiEndpoint: 'https://tomgijselinck.com/dorm-manager/api'
+          }
+        }
+      }
     }
   });
 
@@ -429,6 +461,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'ngconstant:development',
       'wiredep',
       'concurrent:server',
       'postcss:server',
@@ -453,6 +486,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:production',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',

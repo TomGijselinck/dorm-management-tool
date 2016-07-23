@@ -8,7 +8,7 @@
  * Controller of the dormManagementToolApp
  */
 angular.module('dormManagementToolApp')
-  .controller('LoginCtrl', ['$http', '$mdToast', '$state', '$q', function ($http, $mdToast, $state, $q) {
+  .controller('LoginCtrl', ['$http', '$mdToast', '$state', '$q', 'ENV', function ($http, $mdToast, $state, $q, ENV) {
     this.error = false;
     var mv = this;
     this.login = function (email, password) {
@@ -20,7 +20,7 @@ angular.module('dormManagementToolApp')
           }
         }
       );
-      var url = 'https://tomgijselinck.com/dorm-manager/api/users/token.json';
+      var url = ENV.apiEndpoint + '/users/token.json';
       $http({method: 'POST', url: url, data: body})
         .then(
           function (response) {
@@ -28,7 +28,7 @@ angular.module('dormManagementToolApp')
             storeToken(JSON.stringify(response.data)).then(function () {
               $http.defaults.headers.common.Authorization =
                 'Token = ' + JSON.parse(localStorage.getItem('token')).token;
-              $http({method: 'POST', url: 'https://tomgijselinck.com/dorm-manager/api/users/me.json',
+              $http({method: 'POST', url: ENV.apiEndpoint + '/users/me.json',
                 data: JSON.stringify({"email": email})})
                 .then(
                   function (response) {

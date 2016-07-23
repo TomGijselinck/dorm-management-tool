@@ -13,11 +13,11 @@ angular.module('dormManagementToolApp')
       $http.defaults.headers.common.Authorization = 'Token = ' + JSON.parse(localStorage.getItem('token')).token;
     }
   })
-  .controller('GarbageCtrl', ['$http', '$filter', '$mdDialog', 'DormService', 'GarbageDutyService', 'UserService',
-    function ($http, $filter, $mdDialog, DormService, GarbageDutyService, UserService) {
+  .controller('GarbageCtrl', ['$http', '$filter', '$mdDialog', 'DormService', 'GarbageDutyService', 'UserService', 'ENV',
+    function ($http, $filter, $mdDialog, DormService, GarbageDutyService, UserService, ENV) {
       var mv = this;
       this.getData = function () {
-        $http({method: 'GET', url: 'https://tomgijselinck.com/dorm-manager/api/garbage_bags.json'})
+        $http({method: 'GET', url: ENV.apiEndpoint + '/garbage_bags.json'})
           .then(function (response) {
             mv.bags = response.data;
           },
@@ -56,7 +56,7 @@ angular.module('dormManagementToolApp')
       };
       this.setStatus = function (id, status) {
         var body = JSON.stringify({"garbage_bag": {"status": status}});
-        var url = 'https://tomgijselinck.com/dorm-manager/api/garbage_bags/' + id + '.json';
+        var url = ENV.apiEndpoint + '/garbage_bags/' + id + '.json';
         $http({method: 'PATCH', url: url, data: body}).then(function (response) {
           //ok!
         },
@@ -90,7 +90,7 @@ angular.module('dormManagementToolApp')
               "user_id": newResponsible.id
             }
           });
-        var url = 'https://tomgijselinck.com/dorm-manager/api/garbage_bags/' + garbage_id + '.json';
+        var url = ENV.apiEndpoint + '/garbage_bags/' + garbage_id + '.json';
         $http({method: 'PATCH', url: url, data: body}).then(function () {
             console.log('successfully updated garbage bag status and responsible');
           },

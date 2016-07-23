@@ -8,12 +8,12 @@
  * Service in the dormManagementToolApp.
  */
 angular.module('dormManagementToolApp')
-  .service('DormService', ['$filter', '$http', 'UserService',
-    function ($filter, $http, UserService) {
+  .service('DormService', ['$filter', '$http', 'UserService', 'ENV',
+    function ($filter, $http, UserService, ENV) {
       var mv = this;
       this.dormId = UserService.getDormId();
       this.getData = function () {
-        $http({method: 'GET', url: 'https://tomgijselinck.com/dorm-manager/api/dorms/'+mv.dormId+'/residents_summary.json'})
+        $http({method: 'GET', url: ENV.apiEndpoint + '/dorms/'+mv.dormId+'/residents_summary.json'})
           .then(function (response) {
             mv.residents = response.data;
           },

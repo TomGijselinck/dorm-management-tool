@@ -13,12 +13,12 @@ angular.module('dormManagementToolApp')
       $http.defaults.headers.common.Authorization = 'Token =  ' + JSON.parse(localStorage.getItem('token')).token;
     }
   })
-  .controller('UserCtrl', ['$http', 'UserService',  function ($http, UserService) {
+  .controller('UserCtrl', ['$http', 'UserService', 'ENV',  function ($http, UserService, ENV) {
     var mv = this;
     this.name = UserService.getName();
     this.getData = function () {
       $http({method: 'GET',
-             url: 'https://tomgijselinck.com/dorm-manager/api/users/' + UserService.getId() + '/garbage_bags.json'}).then(function (response) {
+             url: ENV.apiEndpoint + '/users/' + UserService.getId() + '/garbage_bags.json'}).then(function (response) {
         mv.duties = response.data;
       },
       function () {
