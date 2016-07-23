@@ -51,7 +51,7 @@ angular
       }
     })
   })
-  .controller('AppCtrl', ['$mdSidenav', '$state', 'UserService', '$http', function ($mdSidenav, $state, UserService, $http) {
+  .controller('AppCtrl', ['$mdSidenav', '$state', 'UserService', '$http', '$q', function ($mdSidenav, $state, UserService, $http, $q) {
     this.toggleSidenav = function (menuId) {
       $mdSidenav(menuId).toggle();
     };
@@ -60,20 +60,40 @@ angular
       $state.go('login');
     };
     this.userName = UserService.getName();
-    this.invalid_token = function () {
-      if (!localStorage.getItem('token')) return false;
-      $http.defaults.headers.common.Authorization = 'Token =  ' + JSON.parse(localStorage.getItem('token')).token;
-      $http({method: 'GET', url: 'https://tomgijselinck.com/dorm-manager/api/users/' + UserService.getId() + '/valid_token'})
-        .then(
-          function () {
-            console.log('valid token');
-            return false
-          },
-          function () {
-            console.log('invalid token');
-            return true
-          });
-    };
-    if (this.invalid_token())
-      $state.go('login');
+
+    function removeToken() {
+      var q = $q.defer();
+      localStorage.removeItem('token');
+      q.resolve();
+      return q.promise;
+    }
+
+    function validate_token () {
+      var deferred = $q.defer();
+      if (!localStorage.getItem('token')) {
+        deferred.reject('no existing token');
+      } else {
+        $http.defaults.headers.common.Authorization = 'Token =  ' + JSON.parse(localStorage.getItem('token')).token;
+        $http({
+          method: 'GET',
+          url: 'https://tomgijselinck.com/dorm-manager/api/users/' + UserService.getId() + '/valid_token'
+        })
+          .then(
+            function () {
+              deferred.resolve('valid token');
+            },
+            function () {
+              deferred.reject('invalid token');
+            });
+      }
+      return deferred.promise
+    }
+    validate_token().then(function (status) {
+      console.log(status);
+    }, function (status) {
+      console.log(status);
+      removeToken().then(function () {
+        $state.go('login');
+      })
+    });
   }]);
