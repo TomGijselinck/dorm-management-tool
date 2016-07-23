@@ -60,6 +60,7 @@ class DormsController < ApplicationController
             user.garbage_bag_duties
                 .where(datetime: Date.new(tomorrow.year, 10, 1)..tomorrow)
       end
+      resident_summary[:number_of_duties_completed] = user_duties.count
       @dorm.garbage_bags.each do |bag|
         bag_duty = {}
         bag_duty[:name] = bag.name
