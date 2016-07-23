@@ -115,7 +115,7 @@ angular.module('dormManagementToolApp')
       this.showConfirmNotFull = function(garbage_id, garbage_name, event) {
         var confirm = $mdDialog.confirm()
           .title('Empty waste bag which is not full?')
-          .textContent('Looks like this garbage bag is not full yet (or his status it not up to date). ' +
+          .textContent('Looks like this garbage bag is not full yet (or it\'s status it not up to date). ' +
             'Are you sure you want to empty it while not being stated as full? ' +
             'This will be added to your completed garbage duties.')
           .targetEvent(event)
