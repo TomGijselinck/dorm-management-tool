@@ -61,7 +61,7 @@ angular.module('dormManagementToolApp')
         "user_id": UserService.getId()
       };
       var body = JSON.stringify({"inactive_period": period});
-      var url = "https://tomgijselinck.com/dorm-manager/api/inactive_periods.json";
+      var url = ENV.apiEndpoint + 'inactive_periods.json';
       $http({method: 'POST', url: url, data: body}).then(function (response) {
         //ok
       },

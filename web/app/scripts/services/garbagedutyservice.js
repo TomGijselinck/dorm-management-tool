@@ -13,7 +13,7 @@ angular.module('dormManagementToolApp')
       $http.defaults.headers.common.Authorization = 'Token =  ' + JSON.parse(localStorage.getItem('token')).token;
     }
   })
-  .service('GarbageDutyService', [ '$http', function ($http) {
+  .service('GarbageDutyService', [ '$http', 'ENV', function ($http, ENV) {
     this.addCompletedDuty = function (user_id, garbage_bag_id, datetime) {
       var body = JSON.stringify(
         {
@@ -23,9 +23,10 @@ angular.module('dormManagementToolApp')
             "datetime": datetime
           }
         });
-      var url = "https://tomgijselinck.com/dorm-manager/api/garbage_bag_duties.json";
+      var url = ENV.apiEndpoint + '/garbage_bag_duties.json';
       $http({method: 'POST', url: url, data: body}).then(function (response) {
         //ok!
+        console.log('successfully created completed garbage bag duty')
       },
       function () {
         console.log('failed to create new completed garbage bag duty');
