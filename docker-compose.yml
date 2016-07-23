@@ -11,3 +11,4 @@ backend:
     - db
   volumes:
     - ./backend/dorm-management:/app/backend
+  command: bundle exec passenger start -e ${APP_ENVIRONMENT}
