@@ -8,7 +8,7 @@
  * Controller of the dormManagementToolApp
  */
 angular.module('dormManagementToolApp')
-  .controller('LoginCtrl', ['$http', '$mdToast', '$state', '$q', 'ENV', function ($http, $mdToast, $state, $q, ENV) {
+  .controller('LoginCtrl', ['$http', 'HelperService', '$state', '$q', 'ENV', function ($http, HelperService, $state, $q, ENV) {
     this.error = false;
     var mv = this;
     this.login = function (email, password) {
@@ -43,18 +43,10 @@ angular.module('dormManagementToolApp')
             });
           },
           function () {
-            mv.showMessage('Wrong credentials!');
+            HelperService.showMessage('Wrong credentials!');
             mv.error = true;
           }
         );
-    };
-    this.showMessage = function(message) {
-      $mdToast.show(
-        $mdToast.simple()
-          .textContent(message)
-          .position('top right')
-          .hideDelay(3000)
-      );
     };
 
     function storeToken(token) {
