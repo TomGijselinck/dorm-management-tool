@@ -13,8 +13,8 @@ angular.module('dormManagementToolApp')
       $http.defaults.headers.common.Authorization = 'Token = ' + JSON.parse(localStorage.getItem('token')).token;
     }
   })
-  .controller('GarbageCtrl', ['$http', '$filter', '$mdDialog', 'DormService', 'GarbageDutyService', 'UserService', 'ENV',
-    function ($http, $filter, $mdDialog, DormService, GarbageDutyService, UserService, ENV) {
+  .controller('GarbageCtrl', ['$http', '$filter', '$mdDialog', 'DormService', 'GarbageDutyService', 'UserService', 'HelperService', 'ENV',
+    function ($http, $filter, $mdDialog, DormService, GarbageDutyService, UserService, HelperService, ENV) {
       var mv = this;
       this.getData = function () {
         $http({method: 'GET', url: ENV.apiEndpoint + '/garbage_bags.json'})
@@ -55,6 +55,10 @@ angular.module('dormManagementToolApp')
           });
       };
       this.setStatus = function (id, status) {
+        if (status == 'full') {
+          var bag = $filter('filter')(mv.bags, {id: id})[0];
+          HelperService.showMessage('a mail has been send to ' + bag.responsible.name);
+        }
         var body = JSON.stringify({"garbage_bag": {"status": status}});
         var url = ENV.apiEndpoint + '/garbage_bags/' + id + '.json';
         $http({method: 'PATCH', url: url, data: body}).then(function (response) {
