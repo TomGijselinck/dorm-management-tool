@@ -73,7 +73,10 @@ angular.module('dormManagementToolApp')
           //TODO: catch exception if no one is active
           if (mv.residents[i].active) {
             for (var j = 0; j < mv.residents[i].garbage_bag_duties.length; j++) {
-              if (mv.residents[i].garbage_bag_duties[j].name == bag_name && mv.residents[i].garbage_bag_duties[j].completed <= min && mv.residents[i].number_of_duties_completed < min_total) {
+              if (mv.residents[i].garbage_bag_duties[j].name == bag_name
+                  && (   (mv.residents[i].garbage_bag_duties[j].completed < min)
+                      || (mv.residents[i].garbage_bag_duties[j].completed = min
+                          && mv.residents[i].number_of_duties_completed < min_total)  )) {
                 responsible = i;
                 min = mv.residents[i].garbage_bag_duties[j].completed;
                 min_total = mv.residents[i].number_of_duties_completed;
