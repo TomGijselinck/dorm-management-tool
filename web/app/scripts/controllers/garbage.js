@@ -80,13 +80,16 @@ angular.module('dormManagementToolApp')
           this.emptyTrash(garbage_id, garbage_name)
         }
       };
-      this.emptyTrash = function (garbage_id, garbage_name) {
+
+      this.emptyTrash = function (garbage_id, garbage_name, assigned_user_id) {
         var user_id = UserService.getId();
         var newResponsible = DormService.getNextResponsible(garbage_name, user_id);
         var bag = $filter('filter')(mv.bags, {name: garbage_name})[0];
         bag.status = 'ok';
         bag.responsible.name = newResponsible.name;
         bag.responsible.id = newResponsible.id;
+        var resident = $filter('filter')(DormService.residents, {id: assigned_user_id})[0];
+        resident.number_of_completed_duties++;
         var body = JSON.stringify(
           {
             "garbage_bag": {
