@@ -20,48 +20,6 @@ angular.module('dormManagementToolApp')
           },
           function () {
             console.log('Failed to GET residents summary');
-            mv.residents = [
-              {
-                "name": "Tom",
-                "id": 1,
-                "number_of_completed_duties": 10,
-                "number_of_active_duties": 2,
-                "garbage_bag_duties": [
-                  {
-                    "name": "brown",
-                    "completed": 5
-                  },
-                  {
-                    "name": "green",
-                    "completed": 2
-                  },
-                  {
-                    "name": "blue",
-                    "completed": 3
-                  }
-                ]
-              },
-              {
-                "name": "Jim",
-                "id": 10,
-                "number_of_completed_duties": 10,
-                "number_of_active_duties": 1,
-                "garbage_bag_duties": [
-                  {
-                    "name": "brown",
-                    "completed": 3
-                  },
-                  {
-                    "name": "green",
-                    "completed": 4
-                  },
-                  {
-                    "name": "blue",
-                    "completed": 3
-                  }
-                ]
-              }
-            ];
           });
 
       this.getNextResponsible = function (bag_name, current_responsible_id) {

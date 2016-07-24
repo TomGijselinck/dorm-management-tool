@@ -16,38 +16,6 @@ angular.module('dormManagementToolApp')
         ApiService.getGarbageBags()
           .then(function (response) {
             mv.bags = response.data;
-          },
-          function () {
-            console.log('GET garbage_bags.json failed!');
-            mv.bags = [
-              {
-                "id": 1,
-                "name": "purple",
-                "status": "full",
-                "responsible": {
-                  "id": 1,
-                  "name": "Bilbo"
-                }
-              },
-              {
-                "id": 2,
-                "name": "yellow",
-                "status": "ok",
-                "responsible": {
-                  "id": 2,
-                  "name": "Pippin"
-                }
-              },
-              {
-                "id": 3,
-                "name": "indigo",
-                "status": "full",
-                "responsible": {
-                  "id": 3,
-                  "name": "Merry"
-                }
-              }
-            ];
           });
       };
 
