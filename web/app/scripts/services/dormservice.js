@@ -13,8 +13,12 @@ angular.module('dormManagementToolApp')
       var mv = this;
       this.dormId = UserService.getDormId();
       this.getData = function () {
-        $http({method: 'GET', url: ENV.apiEndpoint + '/dorms/'+mv.dormId+'/residents_summary.json'})
-          .then(function (response) {
+        return $http({
+          method: 'GET',
+          url: ENV.apiEndpoint + '/dorms/'+mv.dormId+'/residents_summary.json'
+        })};
+      this.residents = this.getData()
+        .then(function (response) {
             mv.residents = response.data;
           },
           function () {
@@ -62,8 +66,6 @@ angular.module('dormManagementToolApp')
               }
             ];
           });
-      };
-      this.getData();
       this.getNextResponsible = function (bag_name, current_responsible_id) {
         var current_resident = $filter('filter')(mv.residents, {id: current_responsible_id})[0];
         var current_duty = $filter('filter')(current_resident.garbage_bag_duties, {name: bag_name})[0];
