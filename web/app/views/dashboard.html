@@ -1,6 +1,9 @@
-<md-content layout="column" layout-gt-sm="row" layout-padding="5px">
-  <div flex-md="50" flex-lg="30" layout="column" layout-padding="10px">
-    <div ng-include="'views/user.html'"></div>
+<md-content layout="column" layout-gt-sm="row">
+  <div flex layout="column" layout-padding="5px">
+    <div flex layout="column" layout-gt-xs="row">
+      <div flex ng-include="'views/user.html'"></div>
+      <div flex="20" ng-include="'views/dorm_summary.html'"></div>
+    </div>
     <div ng-include="'views/garbage.html'"></div>
   </div>
 </md-content>
