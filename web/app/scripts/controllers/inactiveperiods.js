@@ -8,15 +8,11 @@
  * Controller of the dormManagementToolApp
  */
 angular.module('dormManagementToolApp')
-  .run(function($http) {
-    if (localStorage.getItem('token')) {
-      $http.defaults.headers.common.Authorization = 'Token =  ' + JSON.parse(localStorage.getItem('token')).token;
-    }
-  })
-  .controller('InactiveperiodsCtrl', ['UserService', '$http', '$filter', 'ENV', function (UserService, $http, $filter, ENV) {
+  .controller('InactiveperiodsCtrl', ['UserService', '$filter', 'ApiService', function (UserService, $filter, ApiService) {
     var mv = this;
+
     this.getData = function () {
-      $http({method: 'GET', url: ENV.apiEndpoint + '/users/' + UserService.getId() + '/inactive_periods.json'})
+      ApiService.getInactivePeriods(UserService.getId())
         .then(function (response) {
           mv.periods = response.data;
         },
@@ -51,6 +47,7 @@ angular.module('dormManagementToolApp')
           }
         });
     };
+
     this.create = function (start, end) {
       //TODO: filter to simple date yyyy-mm-dd
       var startMoment = moment(start).format('DD/MM/YYYY');
@@ -61,8 +58,7 @@ angular.module('dormManagementToolApp')
         "user_id": UserService.getId()
       };
       var body = JSON.stringify({"inactive_period": period});
-      var url = ENV.apiEndpoint + 'inactive_periods.json';
-      $http({method: 'POST', url: url, data: body}).then(function (response) {
+      ApiService.createInacivePeriod(body).then(function (response) {
         //ok
       },
       function () {
@@ -72,6 +68,7 @@ angular.module('dormManagementToolApp')
       period.end = new Date(end);
       mv.periods.push(period);
     };
+
     this.save = function (id, start, end) {
       start = moment(start).format('DD/MM/YYYY');
       end = moment(end).format('DD/MM/YYYY');
@@ -83,25 +80,27 @@ angular.module('dormManagementToolApp')
           }
         }
       );
-      $http({method: 'PATCH', url: ENV.apiEndpoint + '/inactive_periods/' + id + '.json', data: body})
-        .then(function () {
+      ApiService.updateInactivePeriod(id, body).then(
+        function () {
           console.log('successfully saved inactive period');
         },
         function () {
           console.log('failed to save inactive period');
         });
     };
+
     this.delete = function (id) {
       var period = $filter('filter')(mv.periods, {id: id})[0];
       mv.periods.splice(mv.periods.indexOf(period), 1);
-      $http({method: 'DELETE', url: ENV.apiEndpoint + '/inactive_periods/' + id + '.json'})
-        .then(function () {
+      ApiService.deleteInactivePeriod(id).then(
+        function () {
           console.log('successfully removed inactive period');
         },
         function () {
           console.log('failed to remove inactive period');
         });
     };
+
   }])
   .config(function($mdDateLocaleProvider) {
     $mdDateLocaleProvider.formatDate = function(date) {

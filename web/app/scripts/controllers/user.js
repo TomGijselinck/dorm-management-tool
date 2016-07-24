@@ -8,17 +8,13 @@
  * Controller of the dormManagementToolApp
  */
 angular.module('dormManagementToolApp')
-  .run(function($http) {
-    if (localStorage.getItem('token')) {
-      $http.defaults.headers.common.Authorization = 'Token =  ' + JSON.parse(localStorage.getItem('token')).token;
-    }
-  })
-  .controller('UserCtrl', ['$http', 'UserService', 'ENV',  function ($http, UserService, ENV) {
+  .controller('UserCtrl', ['ApiService', 'UserService',  function (ApiService, UserService) {
     var mv = this;
+
     this.name = UserService.getName();
+    
     this.getData = function () {
-      $http({method: 'GET',
-             url: ENV.apiEndpoint + '/users/' + UserService.getId() + '/garbage_bags.json'}).then(function (response) {
+      ApiService.getGarbageBagsOfUser(UserService.getId()).then(function (response) {
         mv.duties = response.data;
       },
       function () {

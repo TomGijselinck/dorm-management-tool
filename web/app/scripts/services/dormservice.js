@@ -8,17 +8,14 @@
  * Service in the dormManagementToolApp.
  */
 angular.module('dormManagementToolApp')
-  .service('DormService', ['$filter', '$http', 'UserService', 'ENV',
-    function ($filter, $http, UserService, ENV) {
+  .service('DormService', ['$filter', 'ApiService', 'UserService',
+    function ($filter, ApiService, UserService) {
       var mv = this;
+
       this.dormId = UserService.getDormId();
-      this.getData = function () {
-        return $http({
-          method: 'GET',
-          url: ENV.apiEndpoint + '/dorms/'+mv.dormId+'/residents_summary.json'
-        })};
-      this.residents = this.getData()
-        .then(function (response) {
+
+      ApiService.getDormSummary(this.dormId).then(
+        function (response) {
             mv.residents = response.data;
           },
           function () {
@@ -66,6 +63,7 @@ angular.module('dormManagementToolApp')
               }
             ];
           });
+
       this.getNextResponsible = function (bag_name, current_responsible_id) {
         var current_resident = $filter('filter')(mv.residents, {id: current_responsible_id})[0];
         var current_duty = $filter('filter')(current_resident.garbage_bag_duties, {name: bag_name})[0];

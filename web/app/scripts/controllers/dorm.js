@@ -8,10 +8,10 @@
  * Controller of the dormManagementToolApp
  */
 angular.module('dormManagementToolApp')
-  .controller('DormCtrl', ['DormService', 'UserService', '$http', 'ENV', function (DormService, UserService, $http, ENV) {
+  .controller('DormCtrl', ['ApiService', 'DormService', 'UserService', function (ApiService, DormService, UserService) {
     var mv = this;
-    $http({method: 'GET',
-           url: ENV.apiEndpoint + '/dorms/' + UserService.getDormId() + '.json'}).then(
+
+    ApiService.getDormName(UserService.getDormId()).then(
       function (response) {
         mv.name = response.data.name;
       },
@@ -19,9 +19,10 @@ angular.module('dormManagementToolApp')
         console.log('failed to fetch dorm name');
       }
     );
-    DormService.getData().then(
+
+    ApiService.getDormSummary(UserService.getDormId()).then(
       function (response) {
         mv.residents = response.data;
       }
-    )
+    );
   }]);

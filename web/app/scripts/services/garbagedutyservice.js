@@ -8,12 +8,7 @@
  * Service in the dormManagementToolApp.
  */
 angular.module('dormManagementToolApp')
-  .run(function($http) {
-    if (localStorage.getItem('token')) {
-      $http.defaults.headers.common.Authorization = 'Token =  ' + JSON.parse(localStorage.getItem('token')).token;
-    }
-  })
-  .service('GarbageDutyService', [ '$http', 'ENV', function ($http, ENV) {
+  .service('GarbageDutyService', [ 'ApiService', function (ApiService) {
     this.addCompletedDuty = function (user_id, garbage_bag_id, datetime) {
       var body = JSON.stringify(
         {
@@ -23,9 +18,7 @@ angular.module('dormManagementToolApp')
             "datetime": datetime
           }
         });
-      var url = ENV.apiEndpoint + '/garbage_bag_duties.json';
-      $http({method: 'POST', url: url, data: body}).then(function (response) {
-        //ok!
+      ApiService.createDuty(body).then(function (response) {
         console.log('successfully created completed garbage bag duty')
       },
       function () {
