@@ -23,7 +23,8 @@ angular.module('dormManagementToolApp')
               {
                 "name": "Tom",
                 "id": 1,
-                "number_of_duties_completed": 10,
+                "number_of_completed_duties": 10,
+                "number_of_active_duties": 2,
                 "garbage_bag_duties": [
                   {
                     "name": "brown",
@@ -42,7 +43,8 @@ angular.module('dormManagementToolApp')
               {
                 "name": "Jim",
                 "id": 10,
-                "number_of_duties_completed": 10,
+                "number_of_completed_duties": 10,
+                "number_of_active_duties": 1,
                 "garbage_bag_duties": [
                   {
                     "name": "brown",
@@ -76,10 +78,12 @@ angular.module('dormManagementToolApp')
               if (mv.residents[i].garbage_bag_duties[j].name == bag_name
                   && (   (mv.residents[i].garbage_bag_duties[j].completed < min)
                       || (mv.residents[i].garbage_bag_duties[j].completed = min
-                          && mv.residents[i].number_of_duties_completed < min_total)  )) {
+                          && mv.residents[i].number_of_completed_duties
+                             + mv.residents[i].number_of_active_duties < min_total)  )) {
                 responsible = i;
                 min = mv.residents[i].garbage_bag_duties[j].completed;
-                min_total = mv.residents[i].number_of_duties_completed;
+                min_total = mv.residents[i].number_of_completed_duties
+                            + mv.residents[i].number_of_active_duties;
               }
             }
           }
