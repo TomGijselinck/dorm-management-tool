@@ -11,7 +11,7 @@ angular.module('dormManagementToolApp')
   .controller('DormCtrl', ['DormService', 'UserService', '$http', 'ENV', function (DormService, UserService, $http, ENV) {
     var mv = this;
     $http({method: 'GET',
-           url: ENV.apiEndpoint + '/dorms/' + UserService.getId() + '.json'}).then(
+           url: ENV.apiEndpoint + '/dorms/' + UserService.getDormId() + '.json'}).then(
       function (response) {
         mv.name = response.data.name;
       },
