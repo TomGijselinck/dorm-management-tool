@@ -8,7 +8,7 @@
     <md-divider></md-divider>
     <md-list ng-repeat="garbageBag in garbage.bags">
       <md-list-item class="noright" layout="row" layout-xs="column" layout-padding="5">
-        <p flex-gt-xs="45">
+        <p flex-gt-xs="40">
           <md-button class="md-raised"
                      ng-class="{'md-primary': garbageBag.status == 'ok'}"
                      ng-click="garbageBag.status='ok'; garbage.setStatus(garbageBag.id, 'ok')">ok</md-button>
@@ -16,13 +16,13 @@
                      ng-class="{'md-warn': garbageBag.status == 'full'}"
                      ng-click="garbageBag.status='full'; garbage.setStatus(garbageBag.id, 'full')">full</md-button>
         </p>
-        <div flex-gt-xs="35" layout-align="left">
+        <div flex layout-align="left">
           <span><b>{{garbageBag.name | uppercase}}</b> </span>
           <span>(<i>Assigned to <b>{{garbageBag.responsible.name}}</b></i>)</span>
         </div>
         <!--TODO: warning if not full-->
         <!--TODO: and add warning if other id than assigned-->
-        <md-button flex-gt-xs="20" class="md-raised"
+        <md-button flex-gt-xs="25" class="md-raised"
                    ng-click="garbage.tryToEmptyTrash(garbageBag.id, garbageBag.name,garbageBag.responsible.id,
                                                      garbageBag.status, $event)">
           Empty Trash
