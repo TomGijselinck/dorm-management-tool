@@ -42,10 +42,12 @@ class GarbageBagsController < ApplicationController
   # PATCH/PUT /garbage_bags/1
   # PATCH/PUT /garbage_bags/1.json
   def update
-    user_id = @garbage_bag.user_id
+    old_user = User.find(@garbage_bag.user_id)
     respond_to do |format|
       if @garbage_bag.update(garbage_bag_params)
-        if @garbage_bag.status == 'full'
+        if params[:transferred]
+          UserMailer.transferred_duty(@garbage_bag, old_user).deliver_now
+        elsif @garbage_bag.status == 'full'
           UserMailer.garbage_bag_full(@garbage_bag).deliver_later
         end
         format.html { redirect_to @garbage_bag, notice: 'Garbage bag was successfully updated.' }

@@ -12,4 +12,11 @@ class UserMailer < ApplicationMailer
     @user = User.find(garbage_bag.user_id)
     mail(to: @user.email, subject: 'Garbage bag full')
   end
+
+  def transferred_duty(garbage_bag, previous_responsible)
+    @garbage_bag = garbage_bag
+    @previous_responsible = previous_responsible
+    @user = User.find(garbage_bag.user_id)
+    mail(to: @user.email, subject: 'Garbage bag full')
+  end
 end

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h2>Hey <%= @user.name %></h2>
+<p>
+  <%= @previous_responsible.name %> was not able to empty the <%= @garbage_bag.name %> waste.
+  You are the next responsible for the <%= @garbage_bag.name %> waste so could
+  you please empty it and update this in de dorm manager app?
+</p>
+<pre style="font-size: 10px">notice: this mail is automatically generated, dot not reply</pre>
+</body>
+</html>

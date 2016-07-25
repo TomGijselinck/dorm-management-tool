@@ -50,16 +50,17 @@ angular.module('dormManagementToolApp')
 
       this.emptyTrash = function (garbage_bag) {
         var user_id = UserService.getId();
-        updateGarbageBag(garbage_bag, newResponsible, 'ok');
         var transferred = false;
         var newResponsible = DormService.getNextResponsible(garbage_bag, transferred);
+        updateGarbageBag(garbage_bag, newResponsible, 'ok', transferred);
         GarbageDutyService.addCompletedDuty(user_id, garbage_bag.id, new Date());
       };
 
       this.transferDuty = function (garbage_bag) {
-        updateGarbageBag(garbage_bag, newResponsible, garbage_bag.status);
         var transferred = true;
         var newResponsible = DormService.getNextResponsible(garbage_bag, transferred);
+        updateGarbageBag(garbage_bag, newResponsible, garbage_bag.status, transferred);
+        HelperService.showMessage('a mail has been send to ' + newResponsible.name);
       };
 
       this.showConfirmNotAssigned = function(garbage_bag, event) {
@@ -104,7 +105,8 @@ angular.module('dormManagementToolApp')
             "garbage_bag": {
               "status": status,
               "user_id": responsible.id
-            }
+            },
+            "transferred": is_transfer
           });
         ApiService.patchGarbageBag(garbage_bag.id, body).then(function () {
             console.log('successfully updated garbage bag status and responsible');
