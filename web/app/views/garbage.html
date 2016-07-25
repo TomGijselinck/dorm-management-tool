@@ -20,11 +20,12 @@
           <span><b>{{garbageBag.name | uppercase}}</b> </span>
           <span>(<i>Assigned to <b>{{garbageBag.responsible.name}}</b></i>)</span>
         </div>
-        <md-button flex-gt-xs="25" class="md-raised"
-                   ng-click="garbage.tryToEmptyTrash(garbageBag.id, garbageBag.name,garbageBag.responsible.id,
-                                                     garbageBag.status, $event)">
-          Empty Trash
-        </md-button>
+        <div flex layout="column" layout-align="center center">
+          <md-button flex-gt-xs="25" class="md-raised"
+                     ng-click="garbage.tryToEmptyTrash(garbageBag, $event)">
+            Empty Trash
+          </md-button>
+        </div>
       </md-list-item>
       <md-divider></md-divider>
     </md-list>
