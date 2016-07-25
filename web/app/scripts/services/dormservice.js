@@ -22,7 +22,7 @@ angular.module('dormManagementToolApp')
             console.log('Failed to GET residents summary');
           });
 
-      this.getNextResponsible = function (garbage_bag, exclude_current_responsible) {
+      this.getNextResponsible = function (garbage_bag, transferred) {
         var current_resident = $filter('filter')(mv.residents, {id: garbage_bag.responsible.id})[0];
         var current_duty = $filter('filter')(current_resident.garbage_bag_duties,
           {name: garbage_bag.name})[0];
@@ -32,7 +32,7 @@ angular.module('dormManagementToolApp')
         var min_total = Infinity;
         for (var i = 0; i < mv.residents.length; i++) {
           //TODO: catch exception if no one is active
-          if (mv.residents[i].active && !(exclude_current_responsible
+          if (mv.residents[i].active && !(transferred
                                           && mv.residents[i].id == UserService.getId())) {
             for (var j = 0; j < mv.residents[i].garbage_bag_duties.length; j++) {
               if (mv.residents[i].garbage_bag_duties[j].name == garbage_bag.name
