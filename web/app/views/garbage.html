@@ -25,6 +25,9 @@
                      ng-click="garbage.tryToEmptyTrash(garbageBag, $event)">
             Empty Trash
           </md-button>
+          <p ng-if="garbageBag.responsible.id == garbage.user_id;">
+            <a href="" ng-click="garbage.transferDuty(garbageBag)">Can't empty garbage?</a>
+          </p>
         </div>
       </md-list-item>
       <md-divider></md-divider>

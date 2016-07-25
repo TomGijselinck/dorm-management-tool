@@ -50,9 +50,14 @@ angular.module('dormManagementToolApp')
 
       this.emptyTrash = function (garbage_bag) {
         var user_id = UserService.getId();
-        var newResponsible = DormService.getNextResponsible(garbage_bag.name, user_id);
+        var newResponsible = DormService.getNextResponsible(garbage_bag, false);
         updateGarbageBag(garbage_bag, newResponsible, 'ok');
         GarbageDutyService.addCompletedDuty(user_id, garbage_bag.id, new Date());
+      };
+
+      this.transferDuty = function (garbage_bag) {
+        var newResponsible = DormService.getNextResponsible(garbage_bag, true);
+        updateGarbageBag(garbage_bag, newResponsible, garbage_bag.status);
       };
 
       this.showConfirmNotAssigned = function(garbage_bag, event) {
