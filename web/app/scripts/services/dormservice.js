@@ -35,15 +35,16 @@ angular.module('dormManagementToolApp')
           if (mv.residents[i].active && !(transferred
                                           && mv.residents[i].id == UserService.getId())) {
             for (var j = 0; j < mv.residents[i].garbage_bag_duties.length; j++) {
-              if (mv.residents[i].garbage_bag_duties[j].name == garbage_bag.name
-                  && (   (mv.residents[i].garbage_bag_duties[j].completed < min)
-                      || (mv.residents[i].garbage_bag_duties[j].completed = min
-                          && mv.residents[i].number_of_completed_duties
-                             + mv.residents[i].number_of_active_duties < min_total)  )) {
-                responsible = i;
-                min = mv.residents[i].garbage_bag_duties[j].completed;
-                min_total = mv.residents[i].number_of_completed_duties
-                            + mv.residents[i].number_of_active_duties;
+              if (mv.residents[i].garbage_bag_duties[j].name == garbage_bag.name) {
+                if (mv.residents[i].garbage_bag_duties[j].completed < min
+                    || (mv.residents[i].garbage_bag_duties[j].completed == min
+                        && mv.residents[i].number_of_completed_duties
+                           + mv.residents[i].number_of_active_duties < min_total)) {
+                  responsible = i;
+                  min = mv.residents[i].garbage_bag_duties[j].completed;
+                  min_total = mv.residents[i].number_of_completed_duties
+                    + mv.residents[i].number_of_active_duties;
+                }
               }
             }
           }
