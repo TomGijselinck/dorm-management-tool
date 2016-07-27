@@ -489,7 +489,7 @@ module.exports = function (grunt) {
     'ngconstant:production',
     'wiredep',
     'useminPrepare',
-    'concurrent:dist',
+    // 'concurrent:dist',
     'postcss',
     'ngtemplates',
     'concat',
