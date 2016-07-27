@@ -27,6 +27,8 @@ angular.module('dormManagementToolApp')
         var current_duty = $filter('filter')(current_resident.garbage_bag_duties,
           {name: garbage_bag.name})[0];
         current_duty.completed++;
+        current_resident.number_of_active_duties--;
+        current_resident.number_of_completed_duties++;
         var responsible = null;
         var min = Infinity;
         var min_total = Infinity;
