@@ -435,7 +435,8 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            apiEndpoint: 'http://localhost:3000'
+            apiEndpoint: 'http://localhost:3000',
+            baseUrl: '/'
           }
         }
       },
@@ -446,7 +447,8 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'https://tomgijselinck.com/dorm-manager/api'
+            apiEndpoint: 'https://tomgijselinck.com/dorm-manager/api',
+            baseUrl: '/dorm-manager/'
           }
         }
       }
