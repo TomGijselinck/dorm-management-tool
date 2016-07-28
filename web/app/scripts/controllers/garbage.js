@@ -21,13 +21,12 @@ angular.module('dormManagementToolApp')
           });
       };
 
-      this.setStatus = function (id, status) {
-        if (status == 'full') {
-          var bag = $filter('filter')(mv.bags, {id: id})[0];
+      this.setStatus = function (bag) {
+        if (bag.status == 'full') {
           HelperService.showMessage('a mail has been send to ' + bag.responsible.name);
         }
-        var body = JSON.stringify({"garbage_bag": {"status": status}});
-        ApiService.patchGarbageBag(id, body).then(function (response) {
+        var body = JSON.stringify({"garbage_bag": {"status": bag.status}});
+        ApiService.patchGarbageBag(bag.id, body).then(function (response) {
           //ok!
         },
         function () {
