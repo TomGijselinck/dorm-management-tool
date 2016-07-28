@@ -1,13 +1,13 @@
 <md-card id="dormSummary" ng-controller="DormCtrl as dorm">
   <md-card-header>
     <md-card-header-text>
-      <span class="md-title">Summary of <i>{{dorm.name}}</i></span>
+      <span class="md-title">Completed duties in <i>{{dorm.name}}</i></span>
     </md-card-header-text>
   </md-card-header>
   <md-card-content>
     <md-grid-list md-cols="2" md-row-height="40px">
       <md-grid-tile ng-repeat="resident in dorm.residents">
-        <p>{{resident.name}}: completed <b>{{resident.number_of_completed_duties}}</b></p>
+        <p>{{resident.name}}: <b>{{resident.number_of_completed_duties}}</b></p>
       </md-grid-tile>
     </md-grid-list>
   </md-card-content>
