@@ -96,7 +96,7 @@ class UsersController < ApplicationController
       @user = User.find_by_email user_params['email']
     end
     if @user && @user.authenticate(user_params['password'])
-      payload = { :id => @user.id, :exp => 24.hours.from_now.to_i }
+      payload = { :id => @user.id, :exp => 7.days.from_now.to_i }
       jwt = JWT.encode(payload, ENV['API_TOKEN_SECRET'])
       render json: { token: jwt }, status: :ok
     else
