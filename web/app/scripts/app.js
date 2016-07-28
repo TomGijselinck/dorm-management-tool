@@ -18,8 +18,13 @@ angular
     'angularMoment',
     'config'
   ])
-  .config(['$stateProvider', '$urlRouterProvider', '$mdDateLocaleProvider', function ($stateProvider, $urlRouterProvider, $mdDateLocaleProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');
+
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
 
     $stateProvider
       .state('dashboard', {
