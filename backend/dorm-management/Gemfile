@@ -33,6 +33,8 @@ gem 'jwt'
 
 gem 'passenger', '>= 5.0.25', require: 'phusion_passenger/rack_handler'
 
+gem 'sqlite3'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
