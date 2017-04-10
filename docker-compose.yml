@@ -3,6 +3,8 @@ db:
   environment:
      - MYSQL_ROOT_PASSWORD=${DM_MYSQL_ROOT_PW}
      - MYSQL_DATABASE=${DM_MYSQL_DATABASE}
+  volumes_from:
+     - db_data
 backend:
   build: ./backend/dorm-management
   ports:
@@ -11,4 +13,15 @@ backend:
     - db
   volumes:
     - ./backend/dorm-management:/app/backend
-  command: bundle exec passenger start -e ${APP_ENVIRONMENT}
+  volumes_from:
+    - bundle
+  env_file: .container_env
+  command: ./script/start.sh
+bundle:
+  image: busybox
+  volumes:
+    - /bundle
+db_data:
+  image: busybox
+  volumes:
+    - /var/lib/mysql

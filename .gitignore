@@ -41,3 +41,12 @@ jspm_packages
 
 # env variables
 .env
+.container_env
+
+# local files
+database
+bundle
+start.sh
+
+# temporary files
+*~
